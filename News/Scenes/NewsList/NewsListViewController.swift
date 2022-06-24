@@ -30,6 +30,11 @@ class NewsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        
+        NewsSearchManager()
+            .request(from: "아이폰", display: 20, start: 1) { news in
+                print(news)
+            }
     }
 }
 

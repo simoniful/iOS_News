@@ -17,6 +17,14 @@ final class NewsWebViewController: UIViewController {
         action: #selector(didTapRightBarButtonItem)
     )
     
+    private let rightBarButtonItem2 = UIBarButtonItem(
+        image: UIImage(systemName: "link"),
+        style: .plain,
+        target: self,
+        action: #selector(didTapRightBarButtonItem)
+    )
+    
+    
     private let webView = WKWebView()
     
     override func viewDidLoad() {
@@ -30,7 +38,7 @@ final class NewsWebViewController: UIViewController {
 private extension NewsWebViewController {
     func setupNavigationBar() {
         navigationItem.title = "기사 제목"
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.rightBarButtonItems = [rightBarButtonItem, rightBarButtonItem2]
     }
     
     func setupWebView() {
