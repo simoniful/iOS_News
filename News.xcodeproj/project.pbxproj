@@ -21,6 +21,7 @@
 		F48A398028657E20002E0F94 /* NewsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A397F28657E1F002E0F94 /* NewsListPresenter.swift */; };
 		F48A398328658222002E0F94 /* NewsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A398228658222002E0F94 /* NewsListViewCell.swift */; };
 		F48A3985286599DE002E0F94 /* NewsListViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A3984286599DD002E0F94 /* NewsListViewHeader.swift */; };
+		F48A39882865A844002E0F94 /* NewsWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39872865A844002E0F94 /* NewsWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		F48A397F28657E1F002E0F94 /* NewsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListPresenter.swift; sourceTree = "<group>"; };
 		F48A398228658222002E0F94 /* NewsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewCell.swift; sourceTree = "<group>"; };
 		F48A3984286599DD002E0F94 /* NewsListViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewHeader.swift; sourceTree = "<group>"; };
+		F48A39872865A844002E0F94 /* NewsWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWebViewController.swift; sourceTree = "<group>"; };
 		FEB8EF78F376FE5A39CED285 /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +185,7 @@
 		F48A397E286564C3002E0F94 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F48A39862865A820002E0F94 /* NewsWeb */,
 				F48A398128657E2B002E0F94 /* NewsList */,
 			);
 			path = Scenes;
@@ -197,6 +200,14 @@
 				F48A397F28657E1F002E0F94 /* NewsListPresenter.swift */,
 			);
 			path = NewsList;
+			sourceTree = "<group>";
+		};
+		F48A39862865A820002E0F94 /* NewsWeb */ = {
+			isa = PBXGroup;
+			children = (
+				F48A39872865A844002E0F94 /* NewsWebViewController.swift */,
+			);
+			path = NewsWeb;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +452,7 @@
 				F48A394728656340002E0F94 /* AppDelegate.swift in Sources */,
 				F48A3985286599DE002E0F94 /* NewsListViewHeader.swift in Sources */,
 				F48A394928656340002E0F94 /* SceneDelegate.swift in Sources */,
+				F48A39882865A844002E0F94 /* NewsWebViewController.swift in Sources */,
 				F48A398028657E20002E0F94 /* NewsListPresenter.swift in Sources */,
 				F48A398328658222002E0F94 /* NewsListViewCell.swift in Sources */,
 			);
