@@ -37,11 +37,11 @@ final class NewsListPresenter: NSObject {
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupLayout()
-        requestNewsList()
+        requestNewsList(isNeededToReset: false)
     }
     
     func didCalledRefresh() {
-        viewController?.endRefreshing()
+        requestNewsList(isNeededToReset: true)
     }
 }
 
@@ -76,12 +76,17 @@ extension NewsListPresenter: UITableViewDelegate {
         
         guard (currentRow % 20) == display - 3 && (currentRow / display) == (currentPage - 1) else { return }
         
-        requestNewsList()
+        requestNewsList(isNeededToReset: false)
     }
 }
 
 private extension NewsListPresenter {
-    func requestNewsList() {
+    func requestNewsList(isNeededToReset: Bool) {
+        if isNeededToReset {
+            currentPage = 0
+            newsList = []
+        }
+        
         newsSearchManager.request(
             from: currentKeyword,
             display: display,
@@ -90,6 +95,7 @@ private extension NewsListPresenter {
             self?.newsList += newValue
             self?.currentPage += 1
             self?.viewController?.reloadTableView()
+            self?.viewController?.endRefreshing()
         }
     }
 }
