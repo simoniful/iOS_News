@@ -11,19 +11,29 @@ protocol NewsListProtocol: AnyObject {
     func setupNavigationBar()
     func setupLayout()
     func endRefreshing()
-    func pushToNewsWebViewController()
+    func pushToNewsWebViewController(with news: News)
+    func reloadTableView()
 }
 
 final class NewsListPresenter: NSObject {
     private weak var viewController: NewsListProtocol?
+    private let newsSearchManager: NewsSearchManagerProtocol
     
-    init(viewController: NewsListProtocol) {
+    private var newsList: [News] = []
+    private var currentKeyword: String = "아이폰"
+    
+    init(
+        viewController: NewsListProtocol,
+        newsSearchManager: NewsSearchManagerProtocol = NewsSearchManager()
+    ) {
         self.viewController = viewController
+        self.newsSearchManager = newsSearchManager
     }
     
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupLayout()
+        requestNewsList()
     }
     
     func didCalledRefresh() {
@@ -33,12 +43,13 @@ final class NewsListPresenter: NSObject {
 
 extension NewsListPresenter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return newsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsListViewCell.identifier, for: indexPath) as? NewsListViewCell else { return UITableViewCell() }
-        cell.setup()
+        let news = newsList[indexPath.row]
+        cell.setup(news: news)
         return cell
     }
     
@@ -51,6 +62,20 @@ extension NewsListPresenter: UITableViewDataSource {
 
 extension NewsListPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewController?.pushToNewsWebViewController()
+        let news = newsList[indexPath.row]
+        viewController?.pushToNewsWebViewController(with: news)
+    }
+}
+
+private extension NewsListPresenter {
+    func requestNewsList() {
+        newsSearchManager.request(
+            from: currentKeyword,
+            display: 20,
+            start: 1
+        ) { [weak self] newValue in
+            self?.newsList += newValue
+            self?.viewController?.reloadTableView()
+        }
     }
 }
