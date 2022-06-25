@@ -19,8 +19,10 @@ final class NewsListPresenter: NSObject {
     private weak var viewController: NewsListProtocol?
     private let newsSearchManager: NewsSearchManagerProtocol
     
+    private let tags: [String] = ["IT", "주식", "개발", "코로나", "게임", "부동산", "메타버스"]
     private var newsList: [News] = []
-    private var currentKeyword: String = "아이폰"
+    
+    private var currentKeyword: String = ""
     // 지금까지 request된, 가지고 있는 보여주고 있는 page가 어디인지 파악
     private var currentPage: Int = 0
     // 한 페이지에 최대 몇 개 까지 보여줄건지
@@ -37,7 +39,6 @@ final class NewsListPresenter: NSObject {
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupLayout()
-        requestNewsList(isNeededToReset: false)
     }
     
     func didCalledRefresh() {
@@ -59,7 +60,7 @@ extension NewsListPresenter: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsListViewHeader.identifier) as? NewsListViewHeader else { return UITableViewHeaderFooterView() }
-        header.setup()
+        header.setup(tags: tags, delegate: self)
         return header
     }
 }
@@ -77,6 +78,13 @@ extension NewsListPresenter: UITableViewDelegate {
         guard (currentRow % 20) == display - 3 && (currentRow / display) == (currentPage - 1) else { return }
         
         requestNewsList(isNeededToReset: false)
+    }
+}
+
+extension NewsListPresenter: NewsListViewHeaderDelegate {
+    func didSelectTag(_ selectedIndex: Int) {
+        currentKeyword = tags[selectedIndex]
+        requestNewsList(isNeededToReset: true)
     }
 }
 
@@ -99,3 +107,5 @@ private extension NewsListPresenter {
         }
     }
 }
+
+
