@@ -31,6 +31,7 @@ final class NewsListViewHeader: UITableViewHeaderFooterView {
     }
 }
 
+// textTag 추가적인 호출로 인한
 extension NewsListViewHeader: TTGTextTagCollectionViewDelegate {
     func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
         guard tag.selected else { return }
@@ -82,28 +83,30 @@ private extension NewsListViewHeader {
             right: insetValue
         )
         
-        tags.forEach {
-            let fontValue = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
-            let tagContent = TTGTextTagStringContent(
-                text: $0,
-                textFont: fontValue,
-                textColor: .white
-            )
-            
-            let selectedTagContent = TTGTextTagStringContent(
-                text: $0,
-                textFont: fontValue,
-                textColor: colorValue
-            )
-            
-            let tag = TTGTextTag(
-                content: tagContent,
-                style: style,
-                selectedContent: selectedTagContent,
-                selectedStyle: selectedStyle
-            )
-            
-            tagCollectionView.addTag(tag)
+        if tagCollectionView.allTags().count != 7 {
+            tags.forEach {
+                let fontValue = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+                let tagContent = TTGTextTagStringContent(
+                    text: $0,
+                    textFont: fontValue,
+                    textColor: .white
+                )
+                
+                let selectedTagContent = TTGTextTagStringContent(
+                    text: $0,
+                    textFont: fontValue,
+                    textColor: colorValue
+                )
+                
+                let tag = TTGTextTag(
+                    content: tagContent,
+                    style: style,
+                    selectedContent: selectedTagContent,
+                    selectedStyle: selectedStyle
+                )
+                
+                tagCollectionView.addTag(tag)
+            }
         }
     }
 }

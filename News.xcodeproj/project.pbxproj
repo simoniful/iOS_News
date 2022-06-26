@@ -15,7 +15,6 @@
 		F48A394B28656340002E0F94 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A394A28656340002E0F94 /* NewsListViewController.swift */; };
 		F48A395028656346002E0F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F48A394F28656346002E0F94 /* Assets.xcassets */; };
 		F48A395328656346002E0F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F48A395128656346002E0F94 /* LaunchScreen.storyboard */; };
-		F48A395E28656346002E0F94 /* NewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A395D28656346002E0F94 /* NewsTests.swift */; };
 		F48A396828656346002E0F94 /* NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A396728656346002E0F94 /* NewsUITests.swift */; };
 		F48A396A28656346002E0F94 /* NewsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A396928656346002E0F94 /* NewsUITestsLaunchTests.swift */; };
 		F48A398028657E20002E0F94 /* NewsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A397F28657E1F002E0F94 /* NewsListPresenter.swift */; };
@@ -27,6 +26,7 @@
 		F48A39902865F249002E0F94 /* NewsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A398F2865F249002E0F94 /* NewsRequestModel.swift */; };
 		F48A39922865F25B002E0F94 /* NewsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39912865F25B002E0F94 /* NewsResponseModel.swift */; };
 		F48A39952866C38A002E0F94 /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39942866C38A002E0F94 /* String +.swift */; };
+		F48A3997286849CA002E0F94 /* NewsListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A3996286849CA002E0F94 /* NewsListPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +63,6 @@
 		F48A395228656346002E0F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F48A395428656346002E0F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F48A395928656346002E0F94 /* NewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F48A395D28656346002E0F94 /* NewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTests.swift; sourceTree = "<group>"; };
 		F48A396328656346002E0F94 /* NewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48A396728656346002E0F94 /* NewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITests.swift; sourceTree = "<group>"; };
 		F48A396928656346002E0F94 /* NewsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		F48A398F2865F249002E0F94 /* NewsRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRequestModel.swift; sourceTree = "<group>"; };
 		F48A39912865F25B002E0F94 /* NewsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponseModel.swift; sourceTree = "<group>"; };
 		F48A39942866C38A002E0F94 /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
+		F48A3996286849CA002E0F94 /* NewsListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListPresenterTests.swift; sourceTree = "<group>"; };
 		FEB8EF78F376FE5A39CED285 /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,7 +170,7 @@
 		F48A395C28656346002E0F94 /* NewsTests */ = {
 			isa = PBXGroup;
 			children = (
-				F48A395D28656346002E0F94 /* NewsTests.swift */,
+				F48A3996286849CA002E0F94 /* NewsListPresenterTests.swift */,
 			);
 			path = NewsTests;
 			sourceTree = "<group>";
@@ -325,6 +325,7 @@
 					};
 					F48A395828656346002E0F94 = {
 						CreatedOnToolsVersion = 13.3.1;
+						LastSwiftMigration = 1330;
 						TestTargetID = F48A394228656340002E0F94;
 					};
 					F48A396228656346002E0F94 = {
@@ -506,7 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F48A395E28656346002E0F94 /* NewsTests.swift in Sources */,
+				F48A3997286849CA002E0F94 /* NewsListPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,15 +727,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AT2N75TMZD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.simon.NewsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/News.app/News";
@@ -747,11 +755,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AT2N75TMZD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.simon.NewsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

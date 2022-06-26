@@ -56,6 +56,7 @@ extension NewsListViewController: NewsListProtocol {
         navigationController?.pushViewController(newsWebViewController, animated: true)
     }
     
+    // header도 리로드 되면서 계속해서 tag가 추가되는 문제 발생
     func reloadTableView() {
         tableView.reloadData()
     }
