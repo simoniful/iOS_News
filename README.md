@@ -32,6 +32,26 @@ TTGTagCollectionView
 
 ## Issue
 
+### 1. TableView reloadData()에서 Section Header 영역 리로드로 인해서 Tag가 계속 생성되는 상황 발생
+
+Header의 내부 메서드 setup() 실행에 있어서 delegate는 유지하고 추가적인 생성은 분기처리를 통해 해결
+
+```swift
+func setup(tags: [String], delegate: NewsListViewHeaderDelegate) {
+        self.tags = tags
+        self.delegate = delegate
+        contentView.backgroundColor = .systemBackground
+        setupLayout()
+        if tagCollectionView.allTags().count != tags.count {
+            setupTagCollectionView()
+        }
+    }
+```
+
+### 2. Test Coverage
+Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 고려하고 필요에 따라 BDD처럼 조건 분기에 대한 처리를 통하여 테스트 분리
+
+![image](https://user-images.githubusercontent.com/75239459/175867790-e2f1c566-d1eb-467d-9e20-1cf52c93cb98.png)
 
 ## ScreenShot
 

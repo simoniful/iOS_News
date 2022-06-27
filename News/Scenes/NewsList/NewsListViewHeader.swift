@@ -27,7 +27,9 @@ final class NewsListViewHeader: UITableViewHeaderFooterView {
         self.delegate = delegate
         contentView.backgroundColor = .systemBackground
         setupLayout()
-        setupTagCollectionView()
+        if tagCollectionView.allTags().count != tags.count {
+            setupTagCollectionView()
+        }
     }
 }
 
@@ -83,30 +85,29 @@ private extension NewsListViewHeader {
             right: insetValue
         )
         
-        if tagCollectionView.allTags().count != 7 {
-            tags.forEach {
-                let fontValue = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
-                let tagContent = TTGTextTagStringContent(
-                    text: $0,
-                    textFont: fontValue,
-                    textColor: .white
-                )
-                
-                let selectedTagContent = TTGTextTagStringContent(
-                    text: $0,
-                    textFont: fontValue,
-                    textColor: colorValue
-                )
-                
-                let tag = TTGTextTag(
-                    content: tagContent,
-                    style: style,
-                    selectedContent: selectedTagContent,
-                    selectedStyle: selectedStyle
-                )
-                
-                tagCollectionView.addTag(tag)
-            }
+        
+        tags.forEach {
+            let fontValue = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+            let tagContent = TTGTextTagStringContent(
+                text: $0,
+                textFont: fontValue,
+                textColor: .white
+            )
+            
+            let selectedTagContent = TTGTextTagStringContent(
+                text: $0,
+                textFont: fontValue,
+                textColor: colorValue
+            )
+            
+            let tag = TTGTextTag(
+                content: tagContent,
+                style: style,
+                selectedContent: selectedTagContent,
+                selectedStyle: selectedStyle
+            )
+            tagCollectionView.addTag(tag)
         }
+        
     }
 }

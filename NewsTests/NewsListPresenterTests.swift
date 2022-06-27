@@ -11,7 +11,83 @@ import XCTest
 class NewsListPresenterTests: XCTestCase {
     var sut: NewsListPresenter!
     
+    var viewController: MockNewsListViewController!
+    var newsSearchManager: MockNewsSearchManager!
+    
     override func setUp() {
-        <#code#>
+        super.setUp()
+        
+        viewController = MockNewsListViewController()
+        newsSearchManager = MockNewsSearchManager()
+        
+        sut = NewsListPresenter(
+            viewController: viewController,
+            newsSearchManager: newsSearchManager
+        )
+    }
+    
+    override func tearDown() {
+        sut = nil
+        viewController = nil
+        newsSearchManager = nil
+        
+        super.tearDown()
+    }
+    
+    func test_viewDidLoad가_요청될_때() {
+        sut.viewDidLoad()
+        
+        XCTAssertTrue(viewController.isCalledSetupNavigationBar)
+        XCTAssertTrue(viewController.isCalledSetupLayout)
+    }
+    
+    func test_didCalledRefresh가_요청될_때_request에_실패하면() {
+        newsSearchManager.error = NSError() as Error
+        sut.didCalledRefresh()
+        
+        XCTAssertTrue(newsSearchManager.isCalledRequest)
+        XCTAssertFalse(viewController.isCalledReloadTableView)
+        XCTAssertFalse(viewController.isCalledEndRefreshing)
+    }
+    
+    func test_didCalledRefresh가_요청될_때_request에_성공하면() {
+        newsSearchManager.error = nil
+        sut.didCalledRefresh()
+        
+        XCTAssertTrue(newsSearchManager.isCalledRequest)
+        XCTAssertTrue(viewController.isCalledReloadTableView)
+        XCTAssertTrue(viewController.isCalledEndRefreshing)
+    }
+    
+    func test_Table에서_didSelectRowAt가_요청될_때() {
+        sut.newsList = [
+            News(
+                title: "\'토종\' <b>코로나</b> 백신 나온다...원료~완제품 이달내 허가",
+                originallink: "http://www.seouleconews.com/news/articleView.html?idxno=66852",
+                link: "http://www.seouleconews.com/news/articleView.html?idxno=66852",
+                description: "SK바이오사이언스 GBP510  SK바이오사이언스의 \'국산 1호\' <b>코로나</b>19 백신이 품목허가 절차중 최대 고비를 무사히 통과해 허가가 매우 유력해졌다. 마지막 점검절차만 남겨놓은 상태다. 이 제품은 최초의 국내 개발 <b>코로나</b>19... ",
+                pubDate: "Mon, 27 Jun 2022 14:14:00 +0900",
+                isScrabed: false
+            )
+        ]
+        sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertTrue(viewController.isCalledPushToNewsWebViewController)
+    }
+    
+    func test_Header에서_didSelectTag가_요청될_때() {
+        sut.didSelectTag(0)
+        
+        XCTAssertTrue(newsSearchManager.isCalledRequest)
+    }
+    
+    func test_Table에서_willDisplay가_요청될_때() {
+        sut.currentPage = 1
+        sut.tableView(UITableView(), willDisplay: UITableViewCell(), forRowAt: IndexPath(row: 17, section: 0))
+        
+        XCTAssertTrue(newsSearchManager.isCalledRequest)
     }
 }
+
+
+

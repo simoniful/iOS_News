@@ -27,6 +27,8 @@
 		F48A39922865F25B002E0F94 /* NewsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39912865F25B002E0F94 /* NewsResponseModel.swift */; };
 		F48A39952866C38A002E0F94 /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39942866C38A002E0F94 /* String +.swift */; };
 		F48A3997286849CA002E0F94 /* NewsListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A3996286849CA002E0F94 /* NewsListPresenterTests.swift */; };
+		F48A3999286968CB002E0F94 /* MockNewsSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A3998286968CB002E0F94 /* MockNewsSearchManager.swift */; };
+		F48A399B286968DC002E0F94 /* MockNewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A399A286968DC002E0F94 /* MockNewsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		F48A39912865F25B002E0F94 /* NewsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponseModel.swift; sourceTree = "<group>"; };
 		F48A39942866C38A002E0F94 /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
 		F48A3996286849CA002E0F94 /* NewsListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListPresenterTests.swift; sourceTree = "<group>"; };
+		F48A3998286968CB002E0F94 /* MockNewsSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsSearchManager.swift; sourceTree = "<group>"; };
+		F48A399A286968DC002E0F94 /* MockNewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsListViewController.swift; sourceTree = "<group>"; };
 		FEB8EF78F376FE5A39CED285 /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				F48A3996286849CA002E0F94 /* NewsListPresenterTests.swift */,
+				F48A399C28696C3C002E0F94 /* Mocks */,
 			);
 			path = NewsTests;
 			sourceTree = "<group>";
@@ -247,6 +252,15 @@
 				F48A39942866C38A002E0F94 /* String +.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F48A399C28696C3C002E0F94 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				F48A399A286968DC002E0F94 /* MockNewsListViewController.swift */,
+				F48A3998286968CB002E0F94 /* MockNewsSearchManager.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +521,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48A3999286968CB002E0F94 /* MockNewsSearchManager.swift in Sources */,
+				F48A399B286968DC002E0F94 /* MockNewsListViewController.swift in Sources */,
 				F48A3997286849CA002E0F94 /* NewsListPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
