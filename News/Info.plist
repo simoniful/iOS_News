@@ -7,10 +7,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>X_Naver_Client_Id</key>
-	<string>$(X_Naver_Client_Id)</string>
-	<key>X_Naver_Client_Secret</key>
-	<string>$(X_Naver_Client_Secret)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

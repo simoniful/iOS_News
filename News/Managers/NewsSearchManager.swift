@@ -33,8 +33,8 @@ struct NewsSearchManager: NewsSearchManagerProtocol {
             sort: "date"
         )
         
-        let X_Naver_Client_Id = Bundle.main.object(forInfoDictionaryKey: "X_Naver_Client_Id") as? String
-        let X_Naver_Client_Secret = Bundle.main.object(forInfoDictionaryKey: "X_Naver_Client_Secret") as? String
+        let X_Naver_Client_Id = ProcessInfo.processInfo.environment["X_Naver_Client_Id"]
+        let X_Naver_Client_Secret = ProcessInfo.processInfo.environment["X_Naver_Client_Secret"]
         
         let headers: HTTPHeaders = [
             "X-Naver-Client-Id": X_Naver_Client_Id ?? "",

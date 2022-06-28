@@ -53,6 +53,11 @@ Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 �
 
 ![image](https://user-images.githubusercontent.com/75239459/175867790-e2f1c566-d1eb-467d-9e20-1cf52c93cb98.png)
 
+### 3. Bitrise 사용 CI / CD 환경 구축 시 Secrets 구성 문제
+
+[환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 1](https://medium.com/hongbeomi-dev/bitrise%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-ci-cd-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0-1-firebase-distribution-cd522d53465c)
+
+
 ## ScreenShot
 
 

@@ -68,7 +68,6 @@
 		F48A396328656346002E0F94 /* NewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48A396728656346002E0F94 /* NewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITests.swift; sourceTree = "<group>"; };
 		F48A396928656346002E0F94 /* NewsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		F48A3976286563BD002E0F94 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		F48A397F28657E1F002E0F94 /* NewsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListPresenter.swift; sourceTree = "<group>"; };
 		F48A398228658222002E0F94 /* NewsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewCell.swift; sourceTree = "<group>"; };
 		F48A3984286599DD002E0F94 /* NewsListViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewHeader.swift; sourceTree = "<group>"; };
@@ -138,7 +137,6 @@
 		F48A393A28656340002E0F94 = {
 			isa = PBXGroup;
 			children = (
-				F48A3976286563BD002E0F94 /* Secrets.xcconfig */,
 				F48A394528656340002E0F94 /* News */,
 				F48A395C28656346002E0F94 /* NewsTests */,
 				F48A396628656346002E0F94 /* NewsUITests */,
@@ -565,7 +563,6 @@
 /* Begin XCBuildConfiguration section */
 		F48A396B28656346002E0F94 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F48A3976286563BD002E0F94 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -626,7 +623,6 @@
 		};
 		F48A396C28656346002E0F94 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F48A3976286563BD002E0F94 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

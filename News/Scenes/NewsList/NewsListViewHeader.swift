@@ -33,7 +33,6 @@ final class NewsListViewHeader: UITableViewHeaderFooterView {
     }
 }
 
-// textTag 추가적인 호출로 인한
 extension NewsListViewHeader: TTGTextTagCollectionViewDelegate {
     func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
         guard tag.selected else { return }
@@ -84,7 +83,6 @@ private extension NewsListViewHeader {
             bottom: insetValue,
             right: insetValue
         )
-        
         
         tags.forEach {
             let fontValue = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
