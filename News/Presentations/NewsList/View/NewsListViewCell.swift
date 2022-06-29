@@ -40,7 +40,7 @@ final class NewsListViewCell: UITableViewCell {
         selectionStyle = .none
         
         titleLabel.text = news.title.htmlToString
-        descriptionLabel.text = news.description.htmlToString
+        descriptionLabel.text = news.desc.htmlToString
         dateLabel.text = news.pubDate
     }
 }

@@ -74,7 +74,6 @@ extension NewsListPresenter: UITableViewDelegate {
     // 해당 방식으로 구현 시 애니메이션 튀는 경우 발생, 보다 안정된 pagenation 필요
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let currentRow = indexPath.row
-        print("😆", (currentRow % 20) == display - 3, (currentRow / display) == (currentPage - 1))
         guard (currentRow % 20) == display - 3 && (currentRow / display) == (currentPage - 1) else { return }
         requestNewsList(isNeededToReset: false)
     }
@@ -97,13 +96,19 @@ private extension NewsListPresenter {
         newsSearchManager.request(
             from: currentKeyword,
             display: display,
-            start: (currentPage * display) + 1
-        ) { [weak self] newValue in
-            self?.newsList += newValue
-            self?.currentPage += 1
-            self?.viewController?.reloadTableView()
-            self?.viewController?.endRefreshing()
-        }
+            start: (currentPage * display) + 1,
+            completionHandler: {[weak self] result in
+                switch result {
+                case .success(let data):
+                    let newValue = data.item
+                    self?.newsList += newValue
+                    self?.currentPage += 1
+                    self?.viewController?.reloadTableView()
+                    self?.viewController?.endRefreshing()
+                case .failure(let error):
+                    print(error)
+                }
+            })
     }
 }
 

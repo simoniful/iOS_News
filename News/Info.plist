@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>X_Naver_Client_Secret</key>
+	<string>K_neeYwPYA</string>
+	<key>X_Naver_Client_Id</key>
+	<string>lEw4jI0Ru6zq8GLqS2x0</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

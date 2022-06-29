@@ -69,7 +69,7 @@ Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 �
 + [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 4](https://stackoverflow.com/questions/65828851/how-to-access-bitrise-secret-environment-variable-in-swift-code)
 + [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 5](https://ios-development.tistory.com/749)
 
-### 4. FirebaseStore를 이용한 기사 스크랩
+### 4. CoreData를 이용한 기사 스크랩
 
 ## ScreenShot
 
