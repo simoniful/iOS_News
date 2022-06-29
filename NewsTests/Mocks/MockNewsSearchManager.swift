@@ -16,13 +16,11 @@ final class MockNewsSearchManager: NewsSearchManagerProtocol {
         from keyword: String,
         display: Int,
         start: Int,
-        completionHandler: @escaping ([News]) -> Void
+        completionHandler: @escaping (Result<NewsData, SearchError>) -> Void
     ) {
-        print(isCalledRequest)
         isCalledRequest = true
-        print(isCalledRequest)
         if error == nil {
-            completionHandler([])
+            completionHandler(.success(NewsData(item: [], total: 0, start: 1, display: 20)))
         }
     }
 }
