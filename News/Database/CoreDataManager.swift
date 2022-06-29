@@ -42,7 +42,6 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
 
     @discardableResult func saveNews(item: News) -> Bool {
-        print("saveNews 호출")
         let entity = NSEntityDescription.entity(forEntityName: "ScrapedNews", in: self.context)
         if let entity = entity {
             let managedObject = NSManagedObject(entity: entity, insertInto: self.context)
@@ -56,10 +55,8 @@ final class CoreDataManager: CoreDataManagerProtocol {
 
             do {
                 try self.context.save()
-                print("saveNews 성공")
                 return true
             } catch {
-                print("saveNews 실패")
                 return false
             }
         } else {

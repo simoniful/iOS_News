@@ -1,24 +1,28 @@
 PODS:
   - Alamofire (5.6.1)
   - SnapKit (5.6.0)
+  - Toast-Swift (5.0.1)
   - TTGTagCollectionView (2.1.0)
 
 DEPENDENCIES:
   - Alamofire
   - SnapKit
+  - Toast-Swift
   - TTGTagCollectionView
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - SnapKit
+    - Toast-Swift
     - TTGTagCollectionView
 
 SPEC CHECKSUMS:
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
 
-PODFILE CHECKSUM: bdd21948e8f21bbdc89a3765af0a572bad70ae7d
+PODFILE CHECKSUM: d278fa83ad90a26b1f1c812e02a699250925a749
 
 COCOAPODS: 1.11.3

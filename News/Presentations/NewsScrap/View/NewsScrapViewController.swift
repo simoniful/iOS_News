@@ -23,6 +23,11 @@ final class NewsScrapViewController: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
+    }
 }
 
 extension NewsScrapViewController: NewsScrapProtocol {
@@ -38,8 +43,22 @@ extension NewsScrapViewController: NewsScrapProtocol {
         }
     }
     
-    func pushToNewsWebViewController(with news: News) {
-        
+    func pushToNewsWebViewController(with scrapedNews: ScrapedNews) {
+        let news = News(
+            title: scrapedNews.title ?? "",
+            originallink: scrapedNews.originallink ?? "",
+            link: scrapedNews.link ?? "",
+            desc: scrapedNews.desc ?? "",
+            pubDate: scrapedNews.pubDate ?? "",
+            isScraped: scrapedNews.isScraped
+        )
+        let newsWebViewController = NewsWebViewController(news: news)
+        newsWebViewController.scrapedNews = scrapedNews
+        navigationController?.pushViewController(newsWebViewController, animated: true)
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
 }
 

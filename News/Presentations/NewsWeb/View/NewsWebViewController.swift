@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 import WebKit
+import Toast_Swift
 
 final class NewsWebViewController: UIViewController {
     private var presenter: NewsWebPresenter!
+    var scrapedNews: ScrapedNews? {
+        didSet {
+            presenter.scrapedNews = self.scrapedNews
+        }
+    }
     
     private let rightBarCopyButton = UIBarButtonItem(
         image: UIImage(systemName: "link"),
@@ -45,7 +51,6 @@ final class NewsWebViewController: UIViewController {
 }
 
 private extension NewsWebViewController {
-    // Toast 구현
     @objc func didTapRightBarCopyButton() {
         presenter.didTapRightBarCopyButton()
     }
@@ -66,7 +71,10 @@ extension NewsWebViewController: NewsWebProtocol {
             navigationController?.popViewController(animated: true)
             return
         }
-        view = webView
+        view.addSubview(webView)
+        webView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
         let urlRequest = URLRequest(url: linkURL)
         webView.load(urlRequest)
     }
@@ -74,5 +82,9 @@ extension NewsWebViewController: NewsWebProtocol {
     func setRightBarButton(with isScraped: Bool) {
         let imageName = isScraped ? "bookmark.fill" : "bookmark"
         navigationItem.rightBarButtonItems?[1].image = UIImage(systemName: imageName)
+    }
+    
+    func showToast(with message: String) {
+        view.makeToast(message)
     }
 }

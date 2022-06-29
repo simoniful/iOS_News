@@ -9,6 +9,7 @@ target 'News' do
   pod 'SnapKit'
   pod 'Alamofire'
   pod 'TTGTagCollectionView'
+  pod 'Toast-Swift'
 
   target 'NewsTests' do
     inherit! :search_paths
