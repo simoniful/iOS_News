@@ -15,6 +15,10 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
   + 카테고리별 기사 검색 기능
   + 페이지네이션
   + 액티비티 인디케이터
+  + refreshing 기능
++ 태그 설정 뷰
+  + Compositional layout을 통한 self-sizing CollectionView
+  + delegate 패턴을 통한 데이터 전달
 + 디테일 뷰
   + 즐겨찾기 추가/제거
   + WebView 기반 연결
@@ -23,11 +27,12 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
   + 즐겨찾기 목록 관리
   + 즐겨찾기 데이터 제거
 
+
 ## Getting Start
-> Swift
-MVP, CI/CD, Unit Test
-UIKit, SnapKit
-Alamofire, Toast-swift
+> Swift,
+MVP, CI/CD, Unit Test,
+UIKit, SnapKit,
+Alamofire, Toast-swift,
 TTGTagCollectionView
 
 ## Issue
@@ -77,6 +82,7 @@ Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 �
 따라서, 서로 다른 네이밍으로 관리하고 필요에 따라서 DB에서 가져온 데이터를 파싱하여 엔티티의 데이터 형태로 사용하는게 오히려 안전하다고 생각되어 우선은 분리한 채 작업을 진행해두었다.
 
 ### 5. LargeTitle 관련 rightBarButton 위치 문제
+
 <img src = "https://i.stack.imgur.com/2XLBi.gif" width = 400>
 
 Large 타이틀은 유지하면서 네비게이션 버튼의 위치를 적절한 곳에 위치 시키고 싶었으나, 확실히 조정하는 게 생각보다 어려웠다.
