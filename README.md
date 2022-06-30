@@ -77,6 +77,8 @@ Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 �
 따라서, 서로 다른 네이밍으로 관리하고 필요에 따라서 DB에서 가져온 데이터를 파싱하여 엔티티의 데이터 형태로 사용하는게 오히려 안전하다고 생각되어 우선은 분리한 채 작업을 진행해두었다.
 
 ### 5. LargeTitle 관련 rightBarButton 위치 문제
+<img src = "https://i.stack.imgur.com/2XLBi.gif" width = 400>
+
 Large 타이틀은 유지하면서 네비게이션 버튼의 위치를 적절한 곳에 위치 시키고 싶었으나, 확실히 조정하는 게 생각보다 어려웠다.
 
 일반적인 UI button으로 구성하여 bar에 올리는 방식을 추천하여 생명주기에 따라서 해당 뷰를 보여주는 방식으로 구현했다.
@@ -95,6 +97,9 @@ Large 타이틀은 유지하면서 네비게이션 버튼의 위치를 적절한
 
 ### 7. 웹 뷰에서 전달된 인터렉션의 결과로 네이티브의 인터렉션이 동작하지 않는 문제
 
+swift의 대부분의 UI 요소에는 UIResponder가 있다. 처리되지 않은 이벤트는 리스폰더 체인을 통해 랩핑된 view로 전달되게 되는데, 내 생각에 WKWebView는 창이 활성화되면 모든 터치 이벤트를 흡수한다. 아무리 터치해도 프린트가 도저히 동작하지 않아 고민하다가 webView 내의 인터렉션을 시도한 후에야 정상적으로 이벤트 전달이 발생했다. 이 후 리스폰더를 간단하게 작성하므로써 해결!
+
+[참고 레퍼런스](https://stackoverflow.com/questions/56332558/uibutton-selector-not-working-after-button-tapped-within-wkwebview)
 
 ### 8.
 
