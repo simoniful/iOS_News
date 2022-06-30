@@ -57,6 +57,7 @@ class NewsListViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         presenter.viewWillDisappear()
+        // navigationController?.navigationBar.prefersLargeTitles = false
     }
 }
 
@@ -103,9 +104,14 @@ extension NewsListViewController: NewsListProtocol {
         navigationController?.pushViewController(newsWebViewController, animated: true)
     }
     
-    // header도 리로드 되면서 계속해서 tag가 추가되는 문제 발생
     func reloadTableView() {
         tableView.reloadData()
+    }
+    
+    func pushToNewsTagmakerViewController(with tags: [String]) {
+        let newsTagmakerViewController = UINavigationController(rootViewController: NewsTagmakerViewController(tags: tags))
+        newsTagmakerViewController.modalPresentationStyle = .automatic
+        present(newsTagmakerViewController, animated: true)
     }
 }
 
@@ -115,7 +121,7 @@ private extension NewsListViewController {
     }
     
     @objc func didTapRightBarButton() {
-        
+        presenter.didTapRightBarButton()
     }
 }
 

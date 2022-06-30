@@ -14,6 +14,7 @@ protocol NewsListProtocol: AnyObject {
     func pushToNewsWebViewController(with news: News)
     func reloadTableView()
     func removeRightButton()
+    func pushToNewsTagmakerViewController(with tags: [String])
 }
 
 final class NewsListPresenter: NSObject {
@@ -24,9 +25,7 @@ final class NewsListPresenter: NSObject {
     var newsList: [News] = []
     
     private var currentKeyword: String = ""
-    // 지금까지 request된, 가지고 있는 보여주고 있는 page가 어디인지 파악
     var currentPage: Int = 0
-    // 한 페이지에 최대 몇 개 까지 보여줄건지
     private let display: Int = 20
     
     init(
@@ -51,6 +50,10 @@ final class NewsListPresenter: NSObject {
     
     func didCalledRefresh() {
         requestNewsList(isNeededToReset: true)
+    }
+    
+    func didTapRightBarButton() {
+        viewController?.pushToNewsTagmakerViewController(with: tags)
     }
 }
 
@@ -83,10 +86,6 @@ extension NewsListPresenter: UITableViewDelegate {
         let currentRow = indexPath.row
         guard (currentRow % 20) == display - 3 && (currentRow / display) == (currentPage - 1) else { return }
         requestNewsList(isNeededToReset: false)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
 }
 

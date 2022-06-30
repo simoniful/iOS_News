@@ -79,8 +79,6 @@ extension NewsWebViewController: NewsWebProtocol {
         let urlRequest = URLRequest(url: linkURL)
         webView.load(urlRequest)
         webView.allowsBackForwardNavigationGestures = true
-        /* https://stackoverflow.com/questions/56332558/uibutton-selector-not-working-after-button-tapped-within-wkwebview
-         */
         webView.becomeFirstResponder()
     }
     
