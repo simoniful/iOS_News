@@ -28,7 +28,7 @@ final class NewsScrapViewCell: UITableViewCell {
     private lazy var reportStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4.0
+        stackView.spacing = 6.0
         [titleLabel, descriptionLabel].forEach {
             stackView.addArrangedSubview($0)
         }
@@ -45,7 +45,15 @@ final class NewsScrapViewCell: UITableViewCell {
     private lazy var monthDayLabel: UILabel = {
         let label = UILabel()
         label.text = "6.29(수)"
-        label.font = .systemFont(ofSize: 14.0, weight: .bold)
+        label.font = .systemFont(ofSize: 12.0, weight: .bold)
+        label.textColor = .secondaryLabel
+        return label
+    }()
+    
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "오전 05:03"
+        label.font = .systemFont(ofSize: 9.0, weight: .semibold)
         label.textColor = .secondaryLabel
         return label
     }()
@@ -53,16 +61,16 @@ final class NewsScrapViewCell: UITableViewCell {
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.text = "2022"
-        label.font = .systemFont(ofSize: 12.0, weight: .semibold)
-        label.textColor = .tertiaryLabel
+        label.font = .systemFont(ofSize: 10.0, weight: .semibold)
+        label.textColor = .secondaryLabel
         return label
     }()
     
     private lazy var dateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4.0
-        [monthDayLabel, yearLabel].forEach {
+        stackView.distribution = .fillProportionally
+        [monthDayLabel, timeLabel, yearLabel].forEach {
             stackView.addArrangedSubview($0)
         }
         stackView.alignment = .center
@@ -83,10 +91,14 @@ final class NewsScrapViewCell: UITableViewCell {
     func setup(scrapedNews: ScrapedNews) {
         setupLayout()
         selectionStyle = .none
-        // TODO: StringToDate extension 구성
-//        scrapedNews.pubDate
-//        monthDayLabel.text =
-//        yearLabel.text =
+        let date = scrapedNews.pubDate?.toDate()
+        let year = date?.toString(pattern: .year)
+        let monthDay = date?.toString(pattern: .date)
+        let time = date?.toString(pattern: .time)
+    
+        monthDayLabel.text = monthDay
+        yearLabel.text = year
+        timeLabel.text = time
         titleLabel.text = scrapedNews.title?.htmlToString
         descriptionLabel.text = scrapedNews.desc?.htmlToString
     }
@@ -100,11 +112,11 @@ private extension NewsScrapViewCell {
         
         colorBlock.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview()
-            $0.width.equalTo(100.0)
+            $0.width.greaterThanOrEqualTo(90.0)
         }
         
         dateStackView.snp.makeConstraints {
-            $0.edges.equalTo(colorBlock.snp.edges).inset(16.0)
+            $0.edges.equalTo(colorBlock.snp.edges).inset(12.0)
         }
         
         reportStackView.snp.makeConstraints {

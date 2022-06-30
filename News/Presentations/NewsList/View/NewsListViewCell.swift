@@ -41,7 +41,7 @@ final class NewsListViewCell: UITableViewCell {
         
         titleLabel.text = news.title.htmlToString
         descriptionLabel.text = news.desc.htmlToString
-        dateLabel.text = news.pubDate
+        dateLabel.text = news.pubDate.toDate()?.toString(pattern: .custom)
     }
 }
 

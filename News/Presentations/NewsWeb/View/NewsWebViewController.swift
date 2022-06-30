@@ -66,6 +66,7 @@ extension NewsWebViewController: NewsWebProtocol {
         navigationItem.rightBarButtonItems = [rightBarCopyButton, rightBarBookmarkButton]
     }
     
+    // TODO: delegate 구성을 통한 로딩 인디케이터
     func setupWebView(with news: News) {
         guard let linkURL = URL(string: news.link) else {
             navigationController?.popViewController(animated: true)
@@ -77,6 +78,10 @@ extension NewsWebViewController: NewsWebProtocol {
         }
         let urlRequest = URLRequest(url: linkURL)
         webView.load(urlRequest)
+        webView.allowsBackForwardNavigationGestures = true
+        /* https://stackoverflow.com/questions/56332558/uibutton-selector-not-working-after-button-tapped-within-wkwebview
+         */
+        webView.becomeFirstResponder()
     }
     
     func setRightBarButton(with isScraped: Bool) {

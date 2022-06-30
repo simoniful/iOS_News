@@ -40,6 +40,7 @@
 		F48A39C3286C2CC6002E0F94 /* NewsWebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39C2286C2CC5002E0F94 /* NewsWebPresenter.swift */; };
 		F48A39CA286C4794002E0F94 /* NewsScrapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39C9286C4794002E0F94 /* NewsScrapPresenter.swift */; };
 		F48A39CD286C4CF2002E0F94 /* NewsScrapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39CC286C4CF2002E0F94 /* NewsScrapViewCell.swift */; };
+		F48A39D1286D19ED002E0F94 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39D0286D19ED002E0F94 /* Date +.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		F48A39C2286C2CC5002E0F94 /* NewsWebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWebPresenter.swift; sourceTree = "<group>"; };
 		F48A39C9286C4794002E0F94 /* NewsScrapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScrapPresenter.swift; sourceTree = "<group>"; };
 		F48A39CC286C4CF2002E0F94 /* NewsScrapViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScrapViewCell.swift; sourceTree = "<group>"; };
+		F48A39D0286D19ED002E0F94 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
 		FEB8EF78F376FE5A39CED285 /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				F48A39942866C38A002E0F94 /* String +.swift */,
+				F48A39D0286D19ED002E0F94 /* Date +.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				F48A39902865F249002E0F94 /* NewsRequestModel.swift in Sources */,
 				F48A39B8286C0580002E0F94 /* NewsSearchManagerProtocol.swift in Sources */,
 				F48A39A5286BF30A002E0F94 /* NewsScrapViewController.swift in Sources */,
+				F48A39D1286D19ED002E0F94 /* Date +.swift in Sources */,
 				F48A398328658222002E0F94 /* NewsListViewCell.swift in Sources */,
 				F48A39BB286C078A002E0F94 /* NetworkError.swift in Sources */,
 				F48A39952866C38A002E0F94 /* String +.swift in Sources */,

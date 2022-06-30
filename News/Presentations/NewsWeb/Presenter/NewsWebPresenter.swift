@@ -44,7 +44,6 @@ final class NewsWebPresenter: NSObject {
     
     func didTapRightBarBookmarkButton() {
         news.isScraped.toggle()
-        // TODO: 저장될 때 내부 데이터가 특정 값으로 있는지 여부 확인 후 되도록 구현
         if news.isScraped {
             coreDataManager.saveNews(item: news)
             let request: NSFetchRequest<ScrapedNews> = ScrapedNews.fetchRequest()
