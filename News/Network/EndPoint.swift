@@ -25,7 +25,7 @@ final class NewsAPI {
         query: query,
         display: display,
         start: start,
-        sort: "date"
+        sort: "sim"
     )
     
     let headers: HTTPHeaders = [

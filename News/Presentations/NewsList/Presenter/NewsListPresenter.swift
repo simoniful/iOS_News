@@ -13,13 +13,14 @@ protocol NewsListProtocol: AnyObject {
     func endRefreshing()
     func pushToNewsWebViewController(with news: News)
     func reloadTableView()
+    func removeRightButton()
 }
 
 final class NewsListPresenter: NSObject {
     private weak var viewController: NewsListProtocol?
     private let newsSearchManager: NewsSearchManagerProtocol
     
-    private let tags: [String] = ["IT", "주식", "개발", "코로나", "게임", "부동산", "메타버스"]
+    private var tags: [String] = ["IT", "주식", "개발", "코로나", "게임", "부동산", "메타버스"]
     var newsList: [News] = []
     
     private var currentKeyword: String = ""
@@ -37,8 +38,15 @@ final class NewsListPresenter: NSObject {
     }
     
     func viewDidLoad() {
-        viewController?.setupNavigationBar()
         viewController?.setupLayout()
+    }
+    
+    func viewWillAppear() {
+        viewController?.setupNavigationBar()
+    }
+    
+    func viewWillDisappear() {
+        viewController?.removeRightButton()
     }
     
     func didCalledRefresh() {
@@ -71,11 +79,14 @@ extension NewsListPresenter: UITableViewDelegate {
         viewController?.pushToNewsWebViewController(with: news)
     }
     
-    // 해당 방식으로 구현 시 애니메이션 튀는 경우 발생, 보다 안정된 pagenation 필요
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let currentRow = indexPath.row
         guard (currentRow % 20) == display - 3 && (currentRow / display) == (currentPage - 1) else { return }
         requestNewsList(isNeededToReset: false)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 

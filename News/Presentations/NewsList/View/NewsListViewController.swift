@@ -27,9 +27,36 @@ class NewsListViewController: UIViewController {
         return refreshControl
     }()
     
+    private lazy var rightBarButton: UIButton = {
+        let button = UIButton()
+        let largeConfig = UIImage.SymbolConfiguration(
+            pointSize: 22.0,
+            weight: .bold,
+            scale: .large
+        )
+        let largeBoldPlus = UIImage(
+            systemName: "plus.circle",
+            withConfiguration: largeConfig
+        )
+        button.setImage(largeBoldPlus, for: .normal)
+        button.addTarget(self, action: #selector(didTapRightBarButton), for: .touchUpInside)
+        button.tag = 1
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter.viewWillDisappear()
     }
 }
 
@@ -37,6 +64,26 @@ extension NewsListViewController: NewsListProtocol {
     func setupNavigationBar() {
         navigationItem.title = "NEWS"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.addSubview(rightBarButton)
+        
+        guard let targetView = self.navigationController?.navigationBar else { return }
+
+        rightBarButton.snp.makeConstraints {
+            $0.trailing.equalTo(targetView.snp.trailing).inset(16.0)
+            $0.bottom.equalTo(targetView.snp.bottom).inset(8.0)
+            $0.width.equalTo(30.0)
+            $0.height.equalTo(30.0)
+        }
+    }
+    
+    func removeRightButton() {
+        guard let subviews = self.navigationController?.navigationBar.subviews else { return }
+        for view in subviews{
+            if view.tag != 0 {
+                view.removeFromSuperview()
+            }
+        }
     }
     
     func setupLayout() {
@@ -65,6 +112,10 @@ extension NewsListViewController: NewsListProtocol {
 private extension NewsListViewController {
     @objc func didCalledRefresh() {
         presenter.didCalledRefresh()
+    }
+    
+    @objc func didTapRightBarButton() {
+        
     }
 }
 
