@@ -18,14 +18,14 @@ final class NewsWebViewController: UIViewController {
         }
     }
     
-    private let rightBarCopyButton = UIBarButtonItem(
+    private lazy var rightBarCopyButton = UIBarButtonItem(
         image: UIImage(systemName: "link"),
         style: .plain,
         target: self,
         action: #selector(didTapRightBarCopyButton)
     )
     
-    private let rightBarBookmarkButton = UIBarButtonItem(
+    private lazy var rightBarBookmarkButton = UIBarButtonItem(
         image: UIImage(systemName: "bookmark"),
         style: .plain,
         target: self,

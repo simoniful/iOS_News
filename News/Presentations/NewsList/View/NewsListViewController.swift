@@ -109,8 +109,8 @@ extension NewsListViewController: NewsListProtocol {
     }
     
     func pushToNewsTagmakerViewController(with tags: [String]) {
-        let newsTagmakerViewController = UINavigationController(rootViewController: NewsTagmakerViewController(tags: tags))
-        newsTagmakerViewController.modalPresentationStyle = .automatic
+        let newsTagmakerViewController = UINavigationController(rootViewController: NewsTagmakerViewController(tags: tags, newsTagmakerDelegate: presenter))
+        newsTagmakerViewController.modalPresentationStyle = .fullScreen
         present(newsTagmakerViewController, animated: true)
     }
 }

@@ -96,6 +96,13 @@ extension NewsListPresenter: NewsListViewHeaderDelegate {
     }
 }
 
+extension NewsListPresenter: NewsTagmakerDelegate {
+    func makeTags(_ tags: [String]) {
+        self.tags = tags
+        viewController?.reloadTableView()
+    }
+}
+
 private extension NewsListPresenter {
     func requestNewsList(isNeededToReset: Bool) {
         if isNeededToReset {

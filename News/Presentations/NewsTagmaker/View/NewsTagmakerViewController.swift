@@ -7,11 +7,18 @@
 
 import UIKit
 import SnapKit
+import Toast_Swift
 
 final class NewsTagmakerViewController: UIViewController {
     private var presenter: NewsTagmakerPresenter!
     
-    private let rightBarButton = UIBarButtonItem(
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.delegate = presenter
+        return searchBar
+    }()
+    
+    private lazy var rightBarButton = UIBarButtonItem(
         image: UIImage(systemName: "plus"),
         style: .plain,
         target: self,
@@ -39,12 +46,13 @@ final class NewsTagmakerViewController: UIViewController {
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 12.0
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(didTapAdjustButton), for: .touchUpInside)
         return button
     }()
     
-    init(tags: [String]) {
+    init(tags: [String], newsTagmakerDelegate: NewsTagmakerDelegate) {
         super.init(nibName: nil, bundle: nil)
-        presenter = NewsTagmakerPresenter(viewController: self, tags: tags)
+        presenter = NewsTagmakerPresenter(viewController: self, delegate: newsTagmakerDelegate, tags: tags)
     }
     
     required init?(coder: NSCoder) {
@@ -60,8 +68,8 @@ final class NewsTagmakerViewController: UIViewController {
 extension NewsTagmakerViewController: NewsTagmakerProtocol {
     func setupNavigationBar() {
         view.backgroundColor = .systemBackground
-        navigationItem.titleView = UISearchBar()
         navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.titleView = searchBar
     }
     
     func setupLayout() {
@@ -81,11 +89,32 @@ extension NewsTagmakerViewController: NewsTagmakerProtocol {
             $0.trailing.bottom.equalToSuperview().inset(16.0)
         }
     }
+    
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
+    
+    func dismissToNewListViewController() {
+        dismiss(animated: true)
+    }
+    
+    func showToast(with message: String) {
+        view.makeToast(message)
+    }
+    
+    func endEditing() {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+    }
 }
 
 private extension NewsTagmakerViewController {
     @objc func didTapRightBarButton() {
-        print("눌림")
+        presenter.didTapRightBarButton()
+    }
+    
+    @objc func didTapAdjustButton() {
+        presenter.didTapAdjustButton()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -120,5 +149,4 @@ private extension NewsTagmakerViewController {
         
         return layout
     }
-
 }

@@ -15,6 +15,7 @@ final class NewsTagmakerViewCell: UICollectionViewCell {
         let button = UIButton()
         button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .semibold)
         button.setTitleColor(UIColor.systemOrange, for: .normal)
+        button.isUserInteractionEnabled = false
         return button
     }()
     

@@ -27,7 +27,19 @@ final class NewsListViewHeader: UITableViewHeaderFooterView {
         self.delegate = delegate
         contentView.backgroundColor = .systemBackground
         setupLayout()
-        if tagCollectionView.allTags().count != tags.count {
+        let prevTags = tagCollectionView.allTags().compactMap { tag in
+            "\(tag.content)"
+                .replacingOccurrences(
+                    of: "<TTGTextTagStringContent: self.text=",
+                    with: ""
+                )
+                .replacingOccurrences(
+                    of: ">",
+                    with: ""
+                )
+        }
+        if prevTags != tags {
+            tagCollectionView.removeAllTags()
             setupTagCollectionView()
         }
     }
