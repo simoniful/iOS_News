@@ -37,8 +37,19 @@ class NewsListPresenterTests: XCTestCase {
     func test_viewDidLoad가_요청될_때() {
         sut.viewDidLoad()
         
-        XCTAssertTrue(viewController.isCalledSetupNavigationBar)
         XCTAssertTrue(viewController.isCalledSetupLayout)
+    }
+    
+    func test_viewWillAppear가_요청될_때() {
+        sut.viewWillAppear()
+        
+        XCTAssertTrue(viewController.isCalledSetupNavigationBar)
+    }
+    
+    func test_viewWillDisappear가_요청될_때() {
+        sut.viewWillDisappear()
+        
+        XCTAssertTrue(viewController.isCalledRemoveRightButton)
     }
     
     func test_didCalledRefresh가_요청될_때_request에_실패하면() {
@@ -59,6 +70,12 @@ class NewsListPresenterTests: XCTestCase {
         XCTAssertTrue(viewController.isCalledEndRefreshing)
     }
     
+    func test_didTapRightBarButton가_요청될_때() {
+        sut.didTapRightBarButton()
+        
+        XCTAssertTrue(viewController.isCalledPushToNewsTagmakerViewController)
+    }
+    
     func test_Table에서_didSelectRowAt가_요청될_때() {
         sut.newsList = [
             News(
@@ -75,17 +92,24 @@ class NewsListPresenterTests: XCTestCase {
         XCTAssertTrue(viewController.isCalledPushToNewsWebViewController)
     }
     
+    func test_Table에서_willDisplay가_요청될_때() {
+        sut.currentPage = 1
+        sut.tableView(UITableView(), willDisplay: UITableViewCell(), forRowAt: IndexPath(row: 17, section: 0))
+        
+        XCTAssertTrue(newsSearchManager.isCalledRequest)
+    }
+    
     func test_Header에서_didSelectTag가_요청될_때() {
         sut.didSelectTag(0)
         
         XCTAssertTrue(newsSearchManager.isCalledRequest)
     }
     
-    func test_Table에서_willDisplay가_요청될_때() {
-        sut.currentPage = 1
-        sut.tableView(UITableView(), willDisplay: UITableViewCell(), forRowAt: IndexPath(row: 17, section: 0))
+    func test_delegate로_makeTags가_요청될_때() {
         
-        XCTAssertTrue(newsSearchManager.isCalledRequest)
+        sut.makeTags([])
+        
+        XCTAssertTrue(viewController.isCalledReloadTableView)
     }
 }
 

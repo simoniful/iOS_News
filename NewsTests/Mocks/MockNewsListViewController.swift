@@ -14,6 +14,8 @@ final class MockNewsListViewController: NewsListProtocol {
     var isCalledEndRefreshing = false
     var isCalledPushToNewsWebViewController = false
     var isCalledReloadTableView = false
+    var isCalledRemoveRightButton = false
+    var isCalledPushToNewsTagmakerViewController = false
     
     func setupNavigationBar() {
         isCalledSetupNavigationBar = true
@@ -33,5 +35,13 @@ final class MockNewsListViewController: NewsListProtocol {
     
     func reloadTableView() {
         isCalledReloadTableView = true
+    }
+    
+    func removeRightButton() {
+        isCalledRemoveRightButton = true
+    }
+    
+    func pushToNewsTagmakerViewController(with tags: [String]) {
+        isCalledPushToNewsTagmakerViewController = true
     }
 }
