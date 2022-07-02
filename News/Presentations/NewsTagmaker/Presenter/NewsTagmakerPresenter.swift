@@ -43,10 +43,6 @@ final class NewsTagmakerPresenter: NSObject {
         viewController?.setupLayout()
     }
     
-    func didTapRightBarButton() {
-        setTags()
-    }
-    
     func setTags() {
         guard keyword != "" else { return }
         if tags.contains(keyword) {
@@ -58,9 +54,17 @@ final class NewsTagmakerPresenter: NSObject {
         }
     }
     
+    func didTapRightBarButton() {
+        setTags()
+    }
+    
     func didTapAdjustButton() {
         delegate.makeTags(tags)
         viewController?.dismissToNewListViewController()
+    }
+    
+    func dismissKeyboard() {
+        viewController?.endEditing()
     }
 }
 
@@ -86,8 +90,8 @@ extension NewsTagmakerPresenter: UICollectionViewDelegate {
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        keyword = ""
         viewController?.endEditing()
+        keyword = ""
     }
 }
 

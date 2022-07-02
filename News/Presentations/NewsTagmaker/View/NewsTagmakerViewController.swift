@@ -34,7 +34,6 @@ final class NewsTagmakerViewController: UIViewController {
         )
         collectionView.dataSource = presenter
         collectionView.delegate = presenter
-        
         return collectionView
     }()
     
@@ -49,6 +48,11 @@ final class NewsTagmakerViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapAdjustButton), for: .touchUpInside)
         return button
     }()
+    
+    private lazy var tap: UITapGestureRecognizer = UITapGestureRecognizer(
+        target: self,
+        action: #selector(dismissKeyboard)
+    )
     
     init(tags: [String], newsTagmakerDelegate: NewsTagmakerDelegate) {
         super.init(nibName: nil, bundle: nil)
@@ -88,6 +92,9 @@ extension NewsTagmakerViewController: NewsTagmakerProtocol {
             $0.leading.equalToSuperview().offset(16.0)
             $0.trailing.bottom.equalToSuperview().inset(16.0)
         }
+        
+        tap.cancelsTouchesInView = false
+        collectionView.addGestureRecognizer(tap)
     }
     
     func reloadCollectionView() {
@@ -115,6 +122,10 @@ private extension NewsTagmakerViewController {
     
     @objc func didTapAdjustButton() {
         presenter.didTapAdjustButton()
+    }
+    
+    @objc func dismissKeyboard() {
+        presenter.dismissKeyboard()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -150,3 +161,5 @@ private extension NewsTagmakerViewController {
         return layout
     }
 }
+
+
