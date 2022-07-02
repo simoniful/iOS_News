@@ -5,7 +5,6 @@
 //  Created by Sang hun Lee on 2022/06/29.
 //
 
-import Foundation
 import UIKit
 
 protocol NewsScrapProtocol: AnyObject {

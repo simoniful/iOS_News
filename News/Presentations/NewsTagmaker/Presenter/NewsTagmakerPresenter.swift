@@ -5,7 +5,6 @@
 //  Created by Sang hun Lee on 2022/06/30.
 //
 
-import Foundation
 import UIKit
 
 protocol NewsTagmakerProtocol: AnyObject {

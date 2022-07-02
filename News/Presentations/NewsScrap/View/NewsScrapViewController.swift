@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class NewsScrapViewController: UIViewController {
     private lazy var presenter = NewsScrapPresenter(viewController: self)
