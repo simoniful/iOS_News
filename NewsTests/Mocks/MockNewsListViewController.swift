@@ -16,6 +16,7 @@ final class MockNewsListViewController: NewsListProtocol {
     var isCalledReloadTableView = false
     var isCalledRemoveRightButton = false
     var isCalledPushToNewsTagmakerViewController = false
+    var isCalledMakeTags = false
     
     func setupNavigationBar() {
         isCalledSetupNavigationBar = true
@@ -43,5 +44,11 @@ final class MockNewsListViewController: NewsListProtocol {
     
     func pushToNewsTagmakerViewController(with tags: [String]) {
         isCalledPushToNewsTagmakerViewController = true
+    }
+}
+
+extension MockNewsListViewController: NewsTagmakerDelegate {
+    func makeTags(_ tags: [String]) {
+        isCalledMakeTags = true
     }
 }

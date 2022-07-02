@@ -42,6 +42,8 @@ class NewsWebPresenterTests: XCTestCase {
         news = nil
         coreDataManager = nil
         viewController = nil
+        
+        super.tearDown()
     }
     
     func test_viewDidLoad가_요청될_때() {

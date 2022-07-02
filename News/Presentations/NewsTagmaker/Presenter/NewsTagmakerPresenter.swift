@@ -25,7 +25,7 @@ final class NewsTagmakerPresenter: NSObject {
     private let delegate: NewsTagmakerDelegate
     
     var tags: [String]
-    private var keyword: String = ""
+    var keyword: String = ""
     
     init(
         viewController: NewsTagmakerProtocol,
@@ -51,10 +51,6 @@ final class NewsTagmakerPresenter: NSObject {
             viewController?.reloadCollectionView()
             viewController?.endEditing()
         }
-    }
-    
-    func didTapRightBarButton() {
-        setTags()
     }
     
     func didTapAdjustButton() {

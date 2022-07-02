@@ -17,7 +17,7 @@ protocol NewsScrapProtocol: AnyObject {
 final class NewsScrapPresenter: NSObject {
     private weak var viewController: NewsScrapProtocol?
     private let coreDataManager: CoreDataManagerProtocol
-    private var scrapedNewsList: [ScrapedNews] = []
+    var scrapedNewsList: [ScrapedNews] = []
     
     init(
         viewController: NewsScrapProtocol,

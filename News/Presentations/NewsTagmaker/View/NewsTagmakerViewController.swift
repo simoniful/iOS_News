@@ -117,7 +117,7 @@ extension NewsTagmakerViewController: NewsTagmakerProtocol {
 
 private extension NewsTagmakerViewController {
     @objc func didTapRightBarButton() {
-        presenter.didTapRightBarButton()
+        presenter.setTags()
     }
     
     @objc func didTapAdjustButton() {
