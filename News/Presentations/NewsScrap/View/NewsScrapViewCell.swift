@@ -45,8 +45,8 @@ final class NewsScrapViewCell: UITableViewCell {
     private lazy var monthDayLabel: UILabel = {
         let label = UILabel()
         label.text = "6.29(수)"
-        label.font = .systemFont(ofSize: 12.0, weight: .bold)
-        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 13.0, weight: .bold)
+        label.textColor = .white
         return label
     }()
     
@@ -54,15 +54,15 @@ final class NewsScrapViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "오전 05:03"
         label.font = .systemFont(ofSize: 9.0, weight: .semibold)
-        label.textColor = .secondaryLabel
+        label.textColor = .white
         return label
     }()
     
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.text = "2022"
-        label.font = .systemFont(ofSize: 10.0, weight: .semibold)
-        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 9.0, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     

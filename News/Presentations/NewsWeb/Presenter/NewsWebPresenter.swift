@@ -7,12 +7,14 @@
 
 import UIKit
 import CoreData
+import WebKit
 
 protocol NewsWebProtocol: AnyObject {
     func setupNavigationBar(with news: News)
     func setupWebView(with news: News)
     func setRightBarButton(with isScraped: Bool)
     func showToast(with message: String)
+    func stopIndicator()
 }
 
 final class NewsWebPresenter: NSObject {
@@ -55,5 +57,11 @@ final class NewsWebPresenter: NSObject {
             }
         }
         viewController?.setRightBarButton(with: news.isScraped)
+    }
+}
+
+extension NewsWebPresenter: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        viewController?.stopIndicator()
     }
 }

@@ -34,6 +34,17 @@ final class NewsWebViewController: UIViewController {
     
     private let webView = WKWebView()
     
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.hidesWhenStopped = true
+        indicatorView.color = .systemGray
+        indicatorView.backgroundColor = .black
+        indicatorView.alpha = 0.4
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.startAnimating()
+        return indicatorView
+    }()
+    
     init(news: News) {
         super.init(nibName: nil, bundle: nil)
         presenter = NewsWebPresenter(viewController: self, news: news)
@@ -66,20 +77,30 @@ extension NewsWebViewController: NewsWebProtocol {
         navigationItem.rightBarButtonItems = [rightBarCopyButton, rightBarBookmarkButton]
     }
     
-    // TODO: delegate 구성을 통한 로딩 인디케이터
     func setupWebView(with news: News) {
         guard let linkURL = URL(string: news.link) else {
             navigationController?.popViewController(animated: true)
             return
         }
-        view.addSubview(webView)
+        
+        [webView, indicatorView].forEach {
+            view.addSubview($0)
+        }
+        
         webView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        indicatorView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            
+        }
+        
         let urlRequest = URLRequest(url: linkURL)
         webView.load(urlRequest)
         webView.allowsBackForwardNavigationGestures = true
         webView.becomeFirstResponder()
+        webView.navigationDelegate = presenter
     }
     
     func setRightBarButton(with isScraped: Bool) {
@@ -89,5 +110,9 @@ extension NewsWebViewController: NewsWebProtocol {
     
     func showToast(with message: String) {
         view.makeToast(message)
+    }
+    
+    func stopIndicator() {
+        indicatorView.stopAnimating()
     }
 }
