@@ -13,6 +13,7 @@ final class MockNewsScrapViewController: NewsScrapProtocol {
     var isCalledSetupLayout = false
     var isCalledPushToNewsWebViewController = false
     var isCalledReloadTableView = false
+    var isCalledDeleteTableRow = false
     
     func setupNavigationBar() {
         isCalledSetupNavigationBar = true
@@ -28,5 +29,9 @@ final class MockNewsScrapViewController: NewsScrapProtocol {
     
     func reloadTableView() {
         isCalledReloadTableView = true
+    }
+    
+    func deleteTableRow(indexPath: IndexPath) {
+        isCalledDeleteTableRow = true
     }
 }

@@ -61,6 +61,10 @@ extension NewsScrapViewController: NewsScrapProtocol {
     func reloadTableView() {
         tableView.reloadData()
     }
+    
+    func deleteTableRow(indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
 }
 
 

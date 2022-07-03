@@ -7,6 +7,7 @@
 
 import XCTest
 import CoreData
+import WebKit
 @testable import News
 
 class NewsWebPresenterTests: XCTestCase {
@@ -15,6 +16,8 @@ class NewsWebPresenterTests: XCTestCase {
     var viewController: MockNewsWebViewController!
     var coreDataManager: MockCoreDataManager!
     var news: News!
+    
+    let navigation = WKNavigation()
     
     override func setUp() {
         super.setUp()
@@ -75,5 +78,11 @@ class NewsWebPresenterTests: XCTestCase {
         
         XCTAssertTrue(coreDataManager.isCalledDeleteNews)
         XCTAssertTrue(viewController.isCalledSetRightBarButton)
+    }
+    
+    func test_WebView에서_didFinish가_요청될_때() {
+        sut.webView(WKWebView(), didFinish: navigation)
+        
+        XCTAssertTrue(viewController.isCalledStopIndicator)
     }
 }

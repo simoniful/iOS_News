@@ -13,6 +13,7 @@ final class MockNewsWebViewController: NewsWebProtocol {
     var isCalledSetupWebView = false
     var isCalledSetRightBarButton = false
     var isCalledShowToast = false
+    var isCalledStopIndicator = false
     
     func setupNavigationBar(with news: News) {
         isCalledSetupNavigationBar = true
@@ -28,5 +29,9 @@ final class MockNewsWebViewController: NewsWebProtocol {
     
     func showToast(with message: String) {
         isCalledShowToast = true
+    }
+    
+    func stopIndicator() {
+        isCalledStopIndicator = true
     }
 }

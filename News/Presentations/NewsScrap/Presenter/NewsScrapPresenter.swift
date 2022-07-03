@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import CoreData
 
 protocol NewsScrapProtocol: AnyObject {
     func setupNavigationBar()
     func setupLayout()
     func pushToNewsWebViewController(with scrapedNews: ScrapedNews)
     func reloadTableView()
+    func deleteTableRow(indexPath: IndexPath)
 }
 
 final class NewsScrapPresenter: NSObject {
@@ -28,7 +30,6 @@ final class NewsScrapPresenter: NSObject {
     }
     
     func viewDidLoad() {
-        requestScrapedNewsList()
         viewController?.setupNavigationBar()
         viewController?.setupLayout()
     }
@@ -59,6 +60,15 @@ extension NewsScrapPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let news = scrapedNewsList[indexPath.row]
         viewController?.pushToNewsWebViewController(with: news)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let deleteOne = scrapedNewsList[indexPath.row]
+            coreDataManager.deleteNews(object: deleteOne)
+            scrapedNewsList.remove(at: indexPath.row)
+            viewController?.deleteTableRow(indexPath: indexPath)
+        }
     }
 }
 

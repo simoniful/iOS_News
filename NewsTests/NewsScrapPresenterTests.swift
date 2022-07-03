@@ -37,9 +37,6 @@ class NewsScrapPresenterTests: XCTestCase {
     func test_viewDidLoad가_요청될_때() {
         sut.viewDidLoad()
         
-        XCTAssertTrue(coreDataManager.isCalledFetchData)
-        XCTAssertTrue(viewController.isCalledReloadTableView)
-        
         XCTAssertTrue(viewController.isCalledSetupNavigationBar)
         XCTAssertTrue(viewController.isCalledSetupLayout)
     }
@@ -59,5 +56,16 @@ class NewsScrapPresenterTests: XCTestCase {
         sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: 0))
         
         XCTAssertTrue(viewController.isCalledPushToNewsWebViewController)
+    }
+    
+    func test_Table에서_commit가_요청될_때() {
+        sut.scrapedNewsList = [
+            ScrapedNews()
+        ]
+        
+        sut.tableView(UITableView(), commit: .delete, forRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertTrue(coreDataManager.isCalledDeleteNews)
+        XCTAssertTrue(viewController.isCalledDeleteTableRow)
     }
 }
