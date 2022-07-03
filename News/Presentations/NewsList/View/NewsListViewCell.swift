@@ -29,7 +29,7 @@ final class NewsListViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "작성일자"
         label.font = .systemFont(ofSize: 12.0, weight: .medium)
-        label.textColor = .secondaryLabel
+        label.textColor = .systemGray
         return label
     }()
     

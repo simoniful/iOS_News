@@ -57,7 +57,6 @@ class NewsListViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         presenter.viewWillDisappear()
-        // navigationController?.navigationBar.prefersLargeTitles = false
     }
 }
 

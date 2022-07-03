@@ -118,6 +118,5 @@ private extension NewsListViewHeader {
             )
             tagCollectionView.addTag(tag)
         }
-        
     }
 }
