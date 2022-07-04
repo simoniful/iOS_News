@@ -57,7 +57,7 @@ final class NewsScrapViewCell: UITableViewCell {
         label.textColor = .white
         return label
     }()
-    
+     
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.text = "2022"
@@ -99,8 +99,8 @@ final class NewsScrapViewCell: UITableViewCell {
         monthDayLabel.text = monthDay
         yearLabel.text = year
         timeLabel.text = time
-        titleLabel.text = scrapedNews.title?.htmlToString
-        descriptionLabel.text = scrapedNews.desc?.htmlToString
+        titleLabel.text = scrapedNews.title
+        descriptionLabel.text = scrapedNews.desc
     }
 }
 

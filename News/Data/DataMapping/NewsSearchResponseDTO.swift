@@ -42,10 +42,10 @@ extension NewsSearchResponseDTO {
 extension DatumDTO {
     func toEntity() -> News {
         return .init(
-            title: title,
+            title: title.htmlToString,
             originallink: originallink,
             link: link,
-            desc: desc,
+            desc: desc.htmlToString,
             pubDate: pubDate,
             isScraped: false
         )

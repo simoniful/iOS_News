@@ -68,7 +68,7 @@ private extension NewsWebViewController {
 
 extension NewsWebViewController: NewsWebProtocol {
     func setupNavigationBar(with news: News) {
-        navigationItem.title = news.title.htmlToString
+        navigationItem.title = news.title
         navigationItem.rightBarButtonItems = [rightBarCopyButton, rightBarBookmarkButton]
     }
     

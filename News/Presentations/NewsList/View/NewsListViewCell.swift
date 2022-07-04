@@ -39,8 +39,8 @@ final class NewsListViewCell: UITableViewCell {
         accessoryType = .disclosureIndicator
         selectionStyle = .none
         
-        titleLabel.text = news.title.htmlToString
-        descriptionLabel.text = news.desc.htmlToString
+        titleLabel.text = news.title
+        descriptionLabel.text = news.desc
         dateLabel.text = news.pubDate.toDate()?.toString(pattern: .custom)
     }
 }

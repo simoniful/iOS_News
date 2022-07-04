@@ -4,7 +4,7 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
 ## Description
 + 최소 타겟 : iOS 14.5
 + CleanArchitecture + MVP 패턴 적용
-+ Core Data 프레임워크 사용으로 즐겨찾기 목록 유지
++ CoreData 프레임워크 사용으로 즐겨찾기 목록 유지
 + Storyboard를 활용하지 않고 코드로만 UI 구성
 + Pagination 구현
 + Unit Test 진행
@@ -29,7 +29,7 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
 
 
 ## Getting Start
-> Swift, MVP, CI/CD, Unit Test, coreData, WebKit, SnapKit, Alamofire, Toast-swift, TTGTagCollectionView
+> Swift, MVP, CI/CD, Unit Test, CoreData, WebKit, SnapKit, Alamofire, Toast-swift, TTGTagCollectionView
 
 ## Issue
 

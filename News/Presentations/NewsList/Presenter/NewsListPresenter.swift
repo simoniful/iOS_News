@@ -90,7 +90,8 @@ extension NewsListPresenter: UITableViewDelegate {
 extension NewsListPresenter: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if newsList.count - 1 == indexPath.row && newsList.count < totalCount {
+            let limitIndex = newsList.count - 1
+            if limitIndex == indexPath.row && newsList.count < totalCount {
                 requestNewsList(isNeededToReset: false)
             }
         }
