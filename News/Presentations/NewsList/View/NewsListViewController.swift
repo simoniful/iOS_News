@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class NewsListViewController: UIViewController {
-    private lazy var presenter = NewsListPresenter(viewController: self)
+    private var presenter: NewsListPresenter!
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -43,6 +43,15 @@ class NewsListViewController: UIViewController {
         button.tag = 1
         return button
     }()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        presenter = NewsListPresenter(viewController: self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +108,7 @@ extension NewsListViewController: NewsListProtocol {
     }
     
     func pushToNewsWebViewController(with news: News) {
-        let newsWebViewController = NewsWebViewController(news: news)
+        let newsWebViewController = NewsWebViewController(news: news, scrapedNews: nil)
         navigationController?.pushViewController(newsWebViewController, animated: true)
     }
     
@@ -108,7 +117,12 @@ extension NewsListViewController: NewsListProtocol {
     }
     
     func pushToNewsTagmakerViewController(with tags: [String]) {
-        let newsTagmakerViewController = UINavigationController(rootViewController: NewsTagmakerViewController(tags: tags, newsTagmakerDelegate: presenter))
+        let newsTagmakerViewController = UINavigationController(
+            rootViewController: NewsTagmakerViewController(
+                tags: tags,
+                newsTagmakerDelegate: presenter
+            )
+        )
         newsTagmakerViewController.modalPresentationStyle = .fullScreen
         present(newsTagmakerViewController, animated: true)
     }

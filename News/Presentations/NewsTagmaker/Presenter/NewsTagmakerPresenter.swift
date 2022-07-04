@@ -92,7 +92,12 @@ extension NewsTagmakerPresenter: UICollectionViewDelegate {
 
 extension NewsTagmakerPresenter: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        keyword = searchText
+        let limitTextCount = 15
+        if searchText.count < limitTextCount {
+            keyword = searchText
+        } else {
+            viewController?.endEditing()
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

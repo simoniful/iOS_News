@@ -11,7 +11,7 @@ import CoreData
 protocol NewsScrapProtocol: AnyObject {
     func setupNavigationBar()
     func setupLayout()
-    func pushToNewsWebViewController(with scrapedNews: ScrapedNews)
+    func pushToNewsWebViewController(with scrapedNews: ScrapedNews, news: News)
     func reloadTableView()
     func deleteTableRow(indexPath: IndexPath)
 }
@@ -58,8 +58,16 @@ extension NewsScrapPresenter: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let news = scrapedNewsList[indexPath.row]
-        viewController?.pushToNewsWebViewController(with: news)
+        let scrapedNews = scrapedNewsList[indexPath.row]
+        let news = News(
+            title: scrapedNews.title ?? "",
+            originallink: scrapedNews.originallink ?? "",
+            link: scrapedNews.link ?? "",
+            desc: scrapedNews.desc ?? "",
+            pubDate: scrapedNews.pubDate ?? "",
+            isScraped: scrapedNews.isScraped
+        )
+        viewController?.pushToNewsWebViewController(with: scrapedNews, news: news)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

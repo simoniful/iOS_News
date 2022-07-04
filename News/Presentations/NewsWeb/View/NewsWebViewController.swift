@@ -12,11 +12,6 @@ import Toast_Swift
 
 final class NewsWebViewController: UIViewController {
     private var presenter: NewsWebPresenter!
-    var scrapedNews: ScrapedNews? {
-        didSet {
-            presenter.scrapedNews = self.scrapedNews
-        }
-    }
     
     private lazy var rightBarCopyButton = UIBarButtonItem(
         image: UIImage(systemName: "link"),
@@ -45,9 +40,9 @@ final class NewsWebViewController: UIViewController {
         return indicatorView
     }()
     
-    init(news: News) {
+    init(news: News, scrapedNews: ScrapedNews?) {
         super.init(nibName: nil, bundle: nil)
-        presenter = NewsWebPresenter(viewController: self, news: news)
+        presenter = NewsWebPresenter(viewController: self, news: news, scrapedNews: scrapedNews)
     }
     
     required init?(coder: NSCoder) {
@@ -105,7 +100,7 @@ extension NewsWebViewController: NewsWebProtocol {
     
     func setRightBarButton(with isScraped: Bool) {
         let imageName = isScraped ? "bookmark.fill" : "bookmark"
-        navigationItem.rightBarButtonItems?[1].image = UIImage(systemName: imageName)
+        navigationItem.rightBarButtonItems?.last?.image = UIImage(systemName: imageName)
     }
     
     func showToast(with message: String) {

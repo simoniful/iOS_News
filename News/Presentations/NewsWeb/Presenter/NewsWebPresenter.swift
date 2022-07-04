@@ -26,11 +26,13 @@ final class NewsWebPresenter: NSObject {
     init(
         viewController: NewsWebProtocol,
         coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared,
-        news: News
+        news: News,
+        scrapedNews: ScrapedNews?
     ) {
         self.viewController = viewController
         self.coreDataManager = coreDataManager
         self.news = news
+        self.scrapedNews = scrapedNews
     }
     
     func viewDidLoad() {

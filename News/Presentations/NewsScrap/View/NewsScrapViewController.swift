@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class NewsScrapViewController: UIViewController {
-    private lazy var presenter = NewsScrapPresenter(viewController: self)
+    private var presenter: NewsScrapPresenter!
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -19,6 +19,15 @@ final class NewsScrapViewController: UIViewController {
         tableView.estimatedRowHeight = 100.0
         return tableView
     }()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        presenter = NewsScrapPresenter(viewController: self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,17 +53,8 @@ extension NewsScrapViewController: NewsScrapProtocol {
         }
     }
     
-    func pushToNewsWebViewController(with scrapedNews: ScrapedNews) {
-        let news = News(
-            title: scrapedNews.title ?? "",
-            originallink: scrapedNews.originallink ?? "",
-            link: scrapedNews.link ?? "",
-            desc: scrapedNews.desc ?? "",
-            pubDate: scrapedNews.pubDate ?? "",
-            isScraped: scrapedNews.isScraped
-        )
-        let newsWebViewController = NewsWebViewController(news: news)
-        newsWebViewController.scrapedNews = scrapedNews
+    func pushToNewsWebViewController(with scrapedNews: ScrapedNews, news: News) {
+        let newsWebViewController = NewsWebViewController(news: news, scrapedNews: scrapedNews)
         navigationController?.pushViewController(newsWebViewController, animated: true)
     }
     
