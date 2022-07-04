@@ -17,6 +17,8 @@ final class MockNewsListViewController: NewsListProtocol {
     var isCalledRemoveRightButton = false
     var isCalledPushToNewsTagmakerViewController = false
     var isCalledMakeTags = false
+    var isCalledChangeNavigationTitleSize = false
+    var isCalledScrollToTop = false
     
     func setupNavigationBar() {
         isCalledSetupNavigationBar = true
@@ -44,6 +46,14 @@ final class MockNewsListViewController: NewsListProtocol {
     
     func pushToNewsTagmakerViewController(with tags: [String]) {
         isCalledPushToNewsTagmakerViewController = true
+    }
+    
+    func changeNavigationTitleSize() {
+        isCalledChangeNavigationTitleSize = true
+    }
+    
+    func scrollToTop() {
+        isCalledScrollToTop = true
     }
 }
 

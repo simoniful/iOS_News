@@ -51,6 +51,7 @@
 		F48A39D6286D97A6002E0F94 /* NewsTagmakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39D5286D97A6002E0F94 /* NewsTagmakerViewController.swift */; };
 		F48A39D8286D97B6002E0F94 /* NewsTagmakerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39D7286D97B6002E0F94 /* NewsTagmakerPresenter.swift */; };
 		F48A39DA286DDA62002E0F94 /* NewsTagmakerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A39D9286DDA62002E0F94 /* NewsTagmakerViewCell.swift */; };
+		F4A1A4772872C5F300B64827 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1A4762872C5F300B64827 /* SearchUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		F48A39D5286D97A6002E0F94 /* NewsTagmakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTagmakerViewController.swift; sourceTree = "<group>"; };
 		F48A39D7286D97B6002E0F94 /* NewsTagmakerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTagmakerPresenter.swift; sourceTree = "<group>"; };
 		F48A39D9286DDA62002E0F94 /* NewsTagmakerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTagmakerViewCell.swift; sourceTree = "<group>"; };
+		F4A1A4762872C5F300B64827 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		FEB8EF78F376FE5A39CED285 /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -336,6 +338,7 @@
 		F48A39AB286BFF20002E0F94 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F4A1A4752872C5CA00B64827 /* useCase */,
 				F48A39B3286C0164002E0F94 /* Entity */,
 				F48A39B6286C053C002E0F94 /* Interface */,
 			);
@@ -469,6 +472,14 @@
 				F48A39D7286D97B6002E0F94 /* NewsTagmakerPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F4A1A4752872C5CA00B64827 /* useCase */ = {
+			isa = PBXGroup;
+			children = (
+				F4A1A4762872C5F300B64827 /* SearchUseCase.swift */,
+			);
+			path = useCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -731,6 +742,7 @@
 				F48A398328658222002E0F94 /* NewsListViewCell.swift in Sources */,
 				F48A39BB286C078A002E0F94 /* NetworkError.swift in Sources */,
 				F48A39952866C38A002E0F94 /* String +.swift in Sources */,
+				F4A1A4772872C5F300B64827 /* SearchUseCase.swift in Sources */,
 				F48A39C1286C2A69002E0F94 /* CoreDataManager.swift in Sources */,
 				F48A39D6286D97A6002E0F94 /* NewsTagmakerViewController.swift in Sources */,
 				F48A39CA286C4794002E0F94 /* NewsScrapPresenter.swift in Sources */,

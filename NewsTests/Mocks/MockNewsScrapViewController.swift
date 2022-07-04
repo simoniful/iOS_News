@@ -23,7 +23,7 @@ final class MockNewsScrapViewController: NewsScrapProtocol {
         isCalledSetupLayout = true
     }
     
-    func pushToNewsWebViewController(with scrapedNews: ScrapedNews) {
+    func pushToNewsWebViewController(with scrapedNews: ScrapedNews, news: News) {
         isCalledPushToNewsWebViewController = true
     }
     

@@ -21,22 +21,24 @@ protocol NewsListProtocol: AnyObject {
 
 final class NewsListPresenter: NSObject {
     private weak var viewController: NewsListProtocol?
-    private let newsSearchManager: NewsSearchManagerProtocol
+    private let useCase: SearchUseCase
     
     private var tags: [String] = ["IT", "주식", "개발", "코로나", "게임", "부동산", "메타버스"]
     var newsList: [News] = []
     
     private var currentKeyword: String = ""
     private var currentPage: Int = 0
-    private var totalCount = 0
+    var totalCount = 0
     private let display: Int = 20
     
     init(
         viewController: NewsListProtocol,
-        newsSearchManager: NewsSearchManagerProtocol = NewsSearchManager()
+        newsSearchManager: SearchUseCase = SearchUseCase(
+            repository: NewsSearchManager()
+        )
     ) {
         self.viewController = viewController
-        self.newsSearchManager = newsSearchManager
+        self.useCase = newsSearchManager
     }
     
     func viewDidLoad() {
@@ -120,7 +122,7 @@ private extension NewsListPresenter {
             newsList = []
         }
         
-        newsSearchManager.request(
+        useCase.request(
             from: currentKeyword,
             display: display,
             start: (currentPage * display) + 1,

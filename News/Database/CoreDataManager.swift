@@ -17,7 +17,7 @@ protocol CoreDataManagerProtocol {
 final class CoreDataManager: CoreDataManagerProtocol {
     static let shared: CoreDataManager = CoreDataManager()
 
-    var container: NSPersistentContainer = {
+    lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "NewsData")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

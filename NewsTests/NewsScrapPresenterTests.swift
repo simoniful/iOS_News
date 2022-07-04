@@ -15,6 +15,7 @@ class NewsScrapPresenterTests: XCTestCase {
     var coreDataManager: MockCoreDataManager!
     
     override func setUp() {
+        // TODO: 실제 CoreData를 이용해서 Mock을 구성하고 마지막에 정리
         super.setUp()
         
         viewController = MockNewsScrapViewController()
