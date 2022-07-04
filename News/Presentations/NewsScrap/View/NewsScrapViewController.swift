@@ -42,7 +42,7 @@ final class NewsScrapViewController: UIViewController {
 
 extension NewsScrapViewController: NewsScrapProtocol {
     func setupNavigationBar() {
-        navigationItem.title = "Bookmarks"
+        navigationItem.title = "Bookmark"
     }
     
     func setupLayout() {

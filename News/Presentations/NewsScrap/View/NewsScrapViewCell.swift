@@ -53,7 +53,7 @@ final class NewsScrapViewCell: UITableViewCell {
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "오전 05:03"
-        label.font = .systemFont(ofSize: 9.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 10.0, weight: .semibold)
         label.textColor = .white
         return label
     }()
@@ -61,7 +61,7 @@ final class NewsScrapViewCell: UITableViewCell {
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.text = "2022"
-        label.font = .systemFont(ofSize: 9.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 10.0, weight: .semibold)
         label.textColor = .white
         return label
     }()

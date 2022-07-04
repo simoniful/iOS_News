@@ -15,6 +15,8 @@ protocol NewsListProtocol: AnyObject {
     func reloadTableView()
     func removeRightButton()
     func pushToNewsTagmakerViewController(with tags: [String])
+    func changeNavigationTitleSize()
+    func scrollToTop()
 }
 
 final class NewsListPresenter: NSObject {
@@ -25,7 +27,8 @@ final class NewsListPresenter: NSObject {
     var newsList: [News] = []
     
     private var currentKeyword: String = ""
-    var currentPage: Int = 0
+    private var currentPage: Int = 0
+    private var totalCount = 0
     private let display: Int = 20
     
     init(
@@ -46,6 +49,7 @@ final class NewsListPresenter: NSObject {
     
     func viewWillDisappear() {
         viewController?.removeRightButton()
+        viewController?.changeNavigationTitleSize()
     }
     
     func didCalledRefresh() {
@@ -81,11 +85,15 @@ extension NewsListPresenter: UITableViewDelegate {
         let news = newsList[indexPath.row]
         viewController?.pushToNewsWebViewController(with: news)
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let currentRow = indexPath.row
-        guard (currentRow % 20) == display - 3 && (currentRow / display) == (currentPage - 1) else { return }
-        requestNewsList(isNeededToReset: false)
+}
+
+extension NewsListPresenter: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if newsList.count - 1 == indexPath.row && newsList.count < totalCount {
+                requestNewsList(isNeededToReset: false)
+            }
+        }
     }
 }
 
@@ -107,6 +115,7 @@ private extension NewsListPresenter {
     func requestNewsList(isNeededToReset: Bool) {
         if isNeededToReset {
             currentPage = 0
+            totalCount = 0
             newsList = []
         }
         
@@ -120,8 +129,12 @@ private extension NewsListPresenter {
                     let newValue = data.item
                     self?.newsList += newValue
                     self?.currentPage += 1
+                    self?.totalCount = data.total
                     self?.viewController?.reloadTableView()
                     self?.viewController?.endRefreshing()
+                    if isNeededToReset {
+                        self?.viewController?.scrollToTop()
+                    }
                 case .failure(let error):
                     print(error)
                 }

@@ -15,6 +15,7 @@ class NewsListViewController: UIViewController {
         let tableView = UITableView()
         tableView.dataSource = presenter
         tableView.delegate = presenter
+        tableView.prefetchDataSource = presenter
         tableView.register(NewsListViewCell.self, forCellReuseIdentifier: NewsListViewCell.identifier)
         tableView.register(NewsListViewHeader.self, forHeaderFooterViewReuseIdentifier: NewsListViewHeader.identifier)
         tableView.refreshControl = refreshControl
@@ -125,6 +126,19 @@ extension NewsListViewController: NewsListProtocol {
         )
         newsTagmakerViewController.modalPresentationStyle = .fullScreen
         present(newsTagmakerViewController, animated: true)
+    }
+    
+    func changeNavigationTitleSize() {
+        navigationItem.title = ""
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    func scrollToTop() {
+        tableView.scrollToRow(
+            at: IndexPath(row: 0, section: 0),
+            at: .top,
+            animated: true
+        )
     }
 }
 
