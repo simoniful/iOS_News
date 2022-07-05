@@ -12,10 +12,10 @@ import WebKit
 
 class NewsWebPresenterTests: XCTestCase {
     var sut: NewsWebPresenter!
-    
+    var dataBaseUseCase: DataBaseUseCase!
     var viewController: MockNewsWebViewController!
-    var coreDataManager: MockCoreDataManager!
     var news: News!
+    var coreDataManager =  MockCoreDataManager()
     
     let navigation = WKNavigation()
     
@@ -23,7 +23,7 @@ class NewsWebPresenterTests: XCTestCase {
         super.setUp()
         
         viewController = MockNewsWebViewController()
-        coreDataManager = MockCoreDataManager()
+        dataBaseUseCase = DataBaseUseCase(repository: coreDataManager)
         news = News(
             title: "\'토종\' 코로나 백신 나온다...원료~완제품 이달내 허가",
             originallink: "http://www.seouleconews.com/news/articleView.html?idxno=66852",
@@ -35,7 +35,7 @@ class NewsWebPresenterTests: XCTestCase {
         
         sut = NewsWebPresenter(
             viewController: viewController,
-            coreDataManager: coreDataManager,
+            dataBaseUseCase: dataBaseUseCase,
             news: news,
             scrapedNews: nil
         )
@@ -44,7 +44,7 @@ class NewsWebPresenterTests: XCTestCase {
     override func tearDown() {
         sut = nil
         news = nil
-        coreDataManager = nil
+        dataBaseUseCase = nil
         viewController = nil
         
         super.tearDown()

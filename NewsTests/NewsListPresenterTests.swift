@@ -10,26 +10,26 @@ import XCTest
 
 class NewsListPresenterTests: XCTestCase {
     var sut: NewsListPresenter!
-    
     var viewController: MockNewsListViewController!
-    var newsSearchManager: MockNewsSearchManager!
+    var searchUseCase: SearchUseCase!
+    var newsSearchManager = MockNewsSearchManager()
     
     override func setUp() {
         super.setUp()
         
         viewController = MockNewsListViewController()
-        newsSearchManager = MockNewsSearchManager()
+        searchUseCase = SearchUseCase(repository: newsSearchManager)
         
         sut = NewsListPresenter(
             viewController: viewController,
-            newsSearchManager: newsSearchManager
+            searchUseCase: searchUseCase
         )
     }
     
     override func tearDown() {
         sut = nil
         viewController = nil
-        newsSearchManager = nil
+        searchUseCase = nil
         
         super.tearDown()
     }

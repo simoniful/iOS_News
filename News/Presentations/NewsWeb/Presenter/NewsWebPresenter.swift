@@ -19,18 +19,18 @@ protocol NewsWebProtocol: AnyObject {
 
 final class NewsWebPresenter: NSObject {
     private weak var viewController: NewsWebProtocol?
-    private let coreDataManager: CoreDataManagerProtocol
+    private let dataBaseUseCase: DataBaseUseCase
     var news: News
     var scrapedNews: ScrapedNews?
     
     init(
         viewController: NewsWebProtocol,
-        coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared,
+        dataBaseUseCase: DataBaseUseCase = DataBaseUseCase(repository: CoreDataManager.shared),
         news: News,
         scrapedNews: ScrapedNews?
     ) {
         self.viewController = viewController
-        self.coreDataManager = coreDataManager
+        self.dataBaseUseCase = dataBaseUseCase
         self.news = news
         self.scrapedNews = scrapedNews
     }
@@ -49,13 +49,13 @@ final class NewsWebPresenter: NSObject {
     func didTapRightBarBookmarkButton() {
         news.isScraped.toggle()
         if news.isScraped {
-            coreDataManager.saveNews(item: news)
+            dataBaseUseCase.saveNews(item: news)
             let request: NSFetchRequest<ScrapedNews> = ScrapedNews.fetchRequest()
             request.predicate = NSPredicate(format: "title CONTAINS %@", news.title)
-            self.scrapedNews = coreDataManager.fetchData(request: request).first
+            self.scrapedNews = dataBaseUseCase.fetchData(request: request).first
         } else {
             if let scrapedNews = scrapedNews {
-                coreDataManager.deleteNews(object: scrapedNews)
+                dataBaseUseCase.deleteNews(object: scrapedNews)
             }
         }
         viewController?.setRightBarButton(with: news.isScraped)

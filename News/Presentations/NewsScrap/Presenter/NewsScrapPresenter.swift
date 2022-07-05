@@ -18,15 +18,15 @@ protocol NewsScrapProtocol: AnyObject {
 
 final class NewsScrapPresenter: NSObject {
     private weak var viewController: NewsScrapProtocol?
-    private let coreDataManager: CoreDataManagerProtocol
+    private let dataBaseUseCase: DataBaseUseCase
     var scrapedNewsList: [ScrapedNews] = []
     
     init(
         viewController: NewsScrapProtocol,
-        coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared
+        dataBaseUseCase: DataBaseUseCase = DataBaseUseCase(repository: CoreDataManager.shared)
     ) {
         self.viewController = viewController
-        self.coreDataManager = coreDataManager
+        self.dataBaseUseCase = dataBaseUseCase
     }
     
     func viewDidLoad() {
@@ -73,7 +73,7 @@ extension NewsScrapPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let deleteOne = scrapedNewsList[indexPath.row]
-            coreDataManager.deleteNews(object: deleteOne)
+            dataBaseUseCase.deleteNews(object: deleteOne)
             scrapedNewsList.remove(at: indexPath.row)
             viewController?.deleteTableRow(indexPath: indexPath)
         }
@@ -82,7 +82,7 @@ extension NewsScrapPresenter: UITableViewDelegate {
 
 private extension NewsScrapPresenter {
     func requestScrapedNewsList() {
-        scrapedNewsList = coreDataManager.fetchData(request: ScrapedNews.fetchRequest())
+        scrapedNewsList = dataBaseUseCase.fetchData(request: ScrapedNews.fetchRequest())
         self.viewController?.reloadTableView()
     }
 }

@@ -10,7 +10,6 @@ import XCTest
 
 class NewsTagmakerPresenterTests: XCTestCase {
     var sut: NewsTagmakerPresenter!
-    
     var viewController: MockNewsTagmakerViewController!
     var delegate: MockNewsListViewController!
     var tags: [String]!

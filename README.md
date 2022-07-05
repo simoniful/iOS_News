@@ -94,8 +94,8 @@ Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 �
 
 MockData를 구성함에 있어서 분리가 있다보니 마음대로 조작된 데이터를 주입하기가 까다로웠다. 간단하게 전달되는 함수만 구현하는 것이 아닌 실제로 DB 내부에 데이터를 주입하고 테스트하는 방식을 고려하게 되면서 기존에 있던 가벼운 수준의 Test Mock을 덜어내고 다시 구성을 시작했다. 구체적으로 CoreData를 경유하여 News 값을 전달하고 삭제하는 로직을 추가하여 구성하였다.
 
-[참고 레퍼런스 레포](https://medium.com/tiendeo-tech/ios-how-to-unit-test-core-data-eb4a754f2603)
-[](https://github.com/Haeuncs/MemoApp/blob/master/MemoAppTests/MemoAppTests.swift)
+[참고 레퍼런스](https://medium.com/tiendeo-tech/ios-how-to-unit-test-core-data-eb4a754f2603)
+[참고 레퍼런스 레포](https://github.com/Haeuncs/MemoApp/blob/master/MemoAppTests/MemoAppTests.swift)
 
 ### 5. LargeTitle 관련 rightBarButton 위치 문제
 
