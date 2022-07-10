@@ -19,7 +19,6 @@ class NewsListViewController: UIViewController {
     private var output: NewsListViewModel.Output
     
     init(viewModel: NewsListViewModel) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         input = NewsListViewModel.Input(
             didSelectRowAt: newsListView.tableView.rx.modelSelected(News.self).asSignal(),
@@ -43,6 +42,7 @@ class NewsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         newsListView.tableView.delegate = viewModel
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +88,6 @@ private extension NewsListViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-    
     func bind() {
         output.newsList
             .drive(newsListView.tableView.rx.items) { [weak self] tableView, index, element in
@@ -98,43 +97,21 @@ private extension NewsListViewController {
             }
             .disposed(by: disposeBag)
         
-        newsListView.tableView.rx.tableHeaderView
-    }
-
-    
-    func endRefreshing() {
-        refreshControl.endRefreshing()
-    }
-    
-    
-    func pushToNewsTagmakerViewController(with tags: [String]) {
-        let newsTagmakerViewController = UINavigationController(
-            rootViewController: NewsTagmakerViewController(
-                tags: tags,
-                newsTagmakerDelegate: presenter
-            )
-        )
-        newsTagmakerViewController.modalPresentationStyle = .fullScreen
+        output.endRefreshing
+            .emit(onNext: { [weak self] _ in
+                self?.newsListView.refreshControl.endRefreshing()
+            })
+            .disposed(by: disposeBag)
         
-        navigationController?.present(newsTagmakerViewController, animated: true)
-    }
-    
-    func scrollToTop() {
-        tableView.scrollToRow(
-            at: IndexPath(row: 0, section: 0),
-            at: .top,
-            animated: true
-        )
+        output.scrollToTop
+            .emit(onNext: { [weak self] _ in
+                self?.newsListView.tableView.scrollToRow(
+                    at: IndexPath(row: 0, section: 0),
+                    at: .top,
+                    animated: true
+                )
+            })
+            .disposed(by: disposeBag)
     }
 }
-
-//private extension NewsListViewController {
-//    @objc func didCalledRefresh() {
-//        presenter.didCalledRefresh()
-//    }
-//
-//    @objc func didTapRightBarButton() {
-//        presenter.didTapRightBarButton()
-//    }
-//}
 
