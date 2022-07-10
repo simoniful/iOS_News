@@ -132,6 +132,10 @@ private extension NewsListViewModel {
     }
 }
 
+extension NewsListViewModel: UITableViewDelegate {
+    
+}
+
 extension NewsListViewModel: NewsTagmakerDelegate {
     func makeTags(_ tags: [String]) {
         self.tags = tags
