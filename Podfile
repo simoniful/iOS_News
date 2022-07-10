@@ -8,12 +8,20 @@ target 'News' do
   # Pods for News
   pod 'SnapKit'
   pod 'Alamofire'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxBlocking'
+  pod 'RxAlamofire'
   pod 'TTGTagCollectionView'
   pod 'Toast-Swift'
 
   target 'NewsTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Stubber'
+    pod 'Nimble'
+    pod 'RxBlocking'
+    pod 'RxTest'
   end
 
   target 'NewsUITests' do

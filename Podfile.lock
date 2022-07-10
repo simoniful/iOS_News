@@ -1,28 +1,68 @@
 PODS:
   - Alamofire (5.6.1)
+  - Nimble (10.0.0)
+  - RxAlamofire (6.1.1):
+    - RxAlamofire/Core (= 6.1.1)
+  - RxAlamofire/Core (6.1.1):
+    - Alamofire (~> 5.4)
+    - RxSwift (~> 6.0)
+  - RxBlocking (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - RxTest (6.5.0):
+    - RxSwift (= 6.5.0)
   - SnapKit (5.6.0)
+  - Stubber (1.5.3)
   - Toast-Swift (5.0.1)
   - TTGTagCollectionView (2.1.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Nimble
+  - RxAlamofire
+  - RxBlocking
+  - RxCocoa
+  - RxSwift
+  - RxTest
   - SnapKit
+  - Stubber
   - Toast-Swift
   - TTGTagCollectionView
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Nimble
+    - RxAlamofire
+    - RxBlocking
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - RxTest
     - SnapKit
+    - Stubber
     - Toast-Swift
     - TTGTagCollectionView
 
 SPEC CHECKSUMS:
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
+  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
+  RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  Stubber: 3ea4080870feeaf5b1637314a92245eef9b8c8e7
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
 
-PODFILE CHECKSUM: d278fa83ad90a26b1f1c812e02a699250925a749
+PODFILE CHECKSUM: 348e7828871e142fe34b338c646029a2e7c3ef27
 
 COCOAPODS: 1.11.3
