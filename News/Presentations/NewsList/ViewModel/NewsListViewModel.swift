@@ -18,7 +18,6 @@ final class NewsListViewModel: NSObject, ViewModel {
     private let searchUseCase: SearchUseCase
     
     private var tags: [String] = ["IT", "개발", "iOS", "WWDC", "Apple"]
-    // var newsList: [News] = []
     
     private var currentKeyword: String = ""
     private var currentPage: Int = 0

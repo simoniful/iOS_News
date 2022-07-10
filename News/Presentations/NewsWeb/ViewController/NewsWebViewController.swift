@@ -26,7 +26,7 @@ final class NewsWebViewController: UIViewController {
             rightBarCopyButtonTapped: newsWebView.rightBarCopyButton.rx.tap.asSignal(),
             rightBarBookmarkButtonTapped: newsWebView.rightBarBookmarkButton.rx.tap.asSignal(),
             webViewLoaded:
-                newsWebView.webView.rx.didFinishLoad.asSingle()
+                newsWebView.webView.rx.didFinishLoad
         )
         output = viewModel.transform(input: input)
         super.init(nibName: nil, bundle: nil)
@@ -52,6 +52,7 @@ final class NewsWebViewController: UIViewController {
 
 private extension NewsWebViewController {
     func setupNavigationBar(with news: News) {
+        navigationItem.largeTitleDisplayMode = .never
         navigationItem.title = news.title
         navigationItem.rightBarButtonItems = [
             newsWebView.rightBarCopyButton, newsWebView.rightBarBookmarkButton

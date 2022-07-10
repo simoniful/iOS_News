@@ -44,10 +44,6 @@ final class NewsTabCoordinator: Coordinator {
     private func configureTabBarController(with tabViewControllers: [UIViewController]) {
         self.tabBarController.setViewControllers(tabViewControllers, animated: true)
         self.tabBarController.selectedIndex = TabBarPageCase.news.pageOrderNumber
-        self.tabBarController.view.backgroundColor = .systemBackground
-        self.tabBarController.tabBar.backgroundColor = .systemBackground
-        self.tabBarController.tabBar.tintColor = .systemOrange
-        self.tabBarController.tabBar.unselectedItemTintColor = .systemGray
         self.changeAnimation()
         self.navigationController.pushViewController(tabBarController, animated: true)
     }
@@ -55,7 +51,7 @@ final class NewsTabCoordinator: Coordinator {
     private func configureTabBarItem(of page: TabBarPageCase) -> UITabBarItem {
         return UITabBarItem(
             title: page.pageTitle,
-            image: UIImage(named: page.tabIconName()),
+            image: UIImage(systemName: page.tabIconName()),
             tag: page.pageOrderNumber
         )
     }

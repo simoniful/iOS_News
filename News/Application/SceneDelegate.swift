@@ -17,6 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let nav = UINavigationController()
         coordinator = AppCoordinator(nav)
         coordinator?.start()
+        window?.tintColor = .systemOrange
+        window?.backgroundColor = .systemBackground
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
     }

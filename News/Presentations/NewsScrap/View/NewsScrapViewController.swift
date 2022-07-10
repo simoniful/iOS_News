@@ -54,8 +54,8 @@ extension NewsScrapViewController: NewsScrapProtocol {
     }
     
     func pushToNewsWebViewController(with scrapedNews: ScrapedNews, news: News) {
-        let newsWebViewController = NewsWebViewController(news: news, scrapedNews: scrapedNews)
-        navigationController?.pushViewController(newsWebViewController, animated: true)
+//        let newsWebViewController = NewsWebViewController(news: news, scrapedNews: scrapedNews)
+//        navigationController?.pushViewController(newsWebViewController, animated: true)
     }
     
     func reloadTableView() {

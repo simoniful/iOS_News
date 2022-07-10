@@ -40,7 +40,7 @@ final class NewsWebViewModel: NSObject, ViewModel {
     struct Input {
         let rightBarCopyButtonTapped: Signal<Void>
         let rightBarBookmarkButtonTapped: Signal<Void>
-        let webViewLoaded: Single<WKNavigation>
+        let webViewLoaded: Observable<WKNavigation>
     }
     
     struct Output {
@@ -83,13 +83,9 @@ final class NewsWebViewModel: NSObject, ViewModel {
         
         input.webViewLoaded
             .subscribe(
-                onSuccess: { [weak self] _ in
+                onNext: { [weak self] _ in
                     guard let self = self else { return }
                     self.indicatorAction.accept(false)
-                },
-                onFailure: { [weak self] _ in
-                    guard let self = self else { return }
-                    self.showToastAction.accept(ToastCase.webLoadFailed.description)
                 }
             )
             .disposed(by: disposeBag)
