@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import UIKit
 
 
 final class NewsListViewModel: NSObject, ViewModel {
@@ -133,7 +134,11 @@ private extension NewsListViewModel {
 }
 
 extension NewsListViewModel: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsListViewHeader.identifier) as? NewsListViewHeader else { return UITableViewHeaderFooterView() }
+        header.setup(tags: tags, delegate: self)
+        return header
+    }
 }
 
 extension NewsListViewModel: NewsTagmakerDelegate {

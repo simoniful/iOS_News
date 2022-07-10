@@ -41,7 +41,6 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newsListView.tableView.delegate = viewModel
         bind()
     }
     
@@ -89,6 +88,10 @@ private extension NewsListViewController {
     }
     
     func bind() {
+        newsListView.tableView
+            .rx.setDelegate(viewModel)
+            .disposed(by: disposeBag)
+        
         output.newsList
             .drive(newsListView.tableView.rx.items) { [weak self] tableView, index, element in
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsListViewCell.identifier) as? NewsListViewCell else { return UITableViewCell() }
