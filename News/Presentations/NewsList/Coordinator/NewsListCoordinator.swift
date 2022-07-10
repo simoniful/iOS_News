@@ -29,7 +29,7 @@ final class NewsListCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showNewsWebViewController(news: News, scrapedNews: ScrapedNews?) {
+    func pushNewsWebViewController(news: News, scrapedNews: ScrapedNews?) {
         let vc = NewsWebViewController(
             viewModel: NewsWebViewModel(
                 coordinator: self,
@@ -41,8 +41,17 @@ final class NewsListCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func presentNewsTagmakerViewController() {
-        
+    func presentNewsTagmakerViewController(
+        tags: [String], newsTagmakerDelegate: NewsTagmakerDelegate
+    ) {
+        let vc = UINavigationController(
+            rootViewController: NewsTagmakerViewController(
+                tags: tags,
+                newsTagmakerDelegate: newsTagmakerDelegate
+            )
+        )
+        vc.modalPresentationStyle = .fullScreen
+        navigationController.present(vc, animated: true)
     }
     
     func popToRootViewController(message: String? = nil) {

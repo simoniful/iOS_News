@@ -21,7 +21,12 @@ class NewsListViewController: UIViewController {
     init(viewModel: NewsListViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-        input = NewsListViewModel.Input()
+        input = NewsListViewModel.Input(
+            didSelectRowAt: newsListView.tableView.rx.modelSelected(News.self).asSignal(),
+            rightBarButtonTapped: newsListView.rightBarButton.rx.tap.asSignal(),
+            refreshSignal: newsListView.refreshControl.rx.controlEvent(.valueChanged).asSignal(),
+            prefetchRowsAt: newsListView.tableView.rx.prefetchRows.asSignal()
+        )
         output = viewModel.transform(input: input)
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,6 +42,7 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        newsListView.tableView.delegate = viewModel
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +90,15 @@ private extension NewsListViewController {
     
     
     func bind() {
+        output.newsList
+            .drive(newsListView.tableView.rx.items) { [weak self] tableView, index, element in
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsListViewCell.identifier) as? NewsListViewCell else { return UITableViewCell() }
+                cell.setup(news: element)
+                return cell
+            }
+            .disposed(by: disposeBag)
         
+        newsListView.tableView.rx.tableHeaderView
     }
 
     
