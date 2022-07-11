@@ -18,11 +18,16 @@ final class NewsScrapCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = NewsScrapViewController()
+        let vc = NewsScrapViewController(
+            viewModel: NewsScrapViewModel(
+                coordinator: self
+            )
+        )
+        
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showNewsWebViewController(news: News, scrapedNews: ScrapedNews?) {
+    func pushNewsWebViewController(news: News, scrapedNews: ScrapedNews?) {
         let vc = NewsWebViewController(
             viewModel: NewsWebViewModel(
                 coordinator: self,

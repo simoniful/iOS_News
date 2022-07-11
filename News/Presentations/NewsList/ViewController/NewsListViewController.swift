@@ -15,18 +15,16 @@ class NewsListViewController: UIViewController {
     
     private let newsListView = NewsListView()
     private var viewModel: NewsListViewModel
-    private var input: NewsListViewModel.Input
-    private var output: NewsListViewModel.Output
+    private lazy var input = NewsListViewModel.Input(
+        didSelectRowAt: newsListView.tableView.rx.modelSelected(News.self).asSignal(),
+        rightBarButtonTapped: newsListView.rightBarButton.rx.tap.asSignal(),
+        refreshSignal: newsListView.refreshControl.rx.controlEvent(.valueChanged).asSignal(),
+        prefetchRowsAt: newsListView.tableView.rx.prefetchRows.asSignal()
+    )
+    private lazy var output = viewModel.transform(input: input)
     
     init(viewModel: NewsListViewModel) {
         self.viewModel = viewModel
-        input = NewsListViewModel.Input(
-            didSelectRowAt: newsListView.tableView.rx.modelSelected(News.self).asSignal(),
-            rightBarButtonTapped: newsListView.rightBarButton.rx.tap.asSignal(),
-            refreshSignal: newsListView.refreshControl.rx.controlEvent(.valueChanged).asSignal(),
-            prefetchRowsAt: newsListView.tableView.rx.prefetchRows.asSignal()
-        )
-        output = viewModel.transform(input: input)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -85,11 +83,11 @@ private extension NewsListViewController {
     
     func bind() {
         newsListView.tableView
-            .rx.setDelegate(viewModel)
+            .rx.setDelegate(self)
             .disposed(by: disposeBag)
         
         output.newsList
-            .drive(newsListView.tableView.rx.items) { [weak self] tableView, index, element in
+            .drive(newsListView.tableView.rx.items) { tableView, index, element in
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsListViewCell.identifier) as? NewsListViewCell else { return UITableViewCell() }
                 cell.setup(news: element)
                 return cell
@@ -117,6 +115,14 @@ private extension NewsListViewController {
                 self?.newsListView.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension NewsListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsListViewHeader.identifier) as? NewsListViewHeader else { return UITableViewHeaderFooterView() }
+        header.setup(tags: viewModel.tags, delegate: viewModel)
+        return header
     }
 }
 

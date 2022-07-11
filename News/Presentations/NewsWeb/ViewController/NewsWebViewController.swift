@@ -17,18 +17,16 @@ final class NewsWebViewController: UIViewController {
     
     private let newsWebView = NewsWebView()
     private var viewModel: NewsWebViewModel
-    private var input: NewsWebViewModel.Input
-    private var output: NewsWebViewModel.Output
+    private lazy var input = NewsWebViewModel.Input(
+        rightBarCopyButtonTapped: newsWebView.rightBarCopyButton.rx.tap.asSignal(),
+        rightBarBookmarkButtonTapped: newsWebView.rightBarBookmarkButton.rx.tap.asSignal(),
+        webViewLoaded:
+            newsWebView.webView.rx.didFinishLoad
+    )
+    private lazy var output = viewModel.transform(input: input)
 
     init(viewModel: NewsWebViewModel) {
         self.viewModel = viewModel
-        input = NewsWebViewModel.Input(
-            rightBarCopyButtonTapped: newsWebView.rightBarCopyButton.rx.tap.asSignal(),
-            rightBarBookmarkButtonTapped: newsWebView.rightBarBookmarkButton.rx.tap.asSignal(),
-            webViewLoaded:
-                newsWebView.webView.rx.didFinishLoad
-        )
-        output = viewModel.transform(input: input)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,7 +53,8 @@ private extension NewsWebViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.title = news.title
         navigationItem.rightBarButtonItems = [
-            newsWebView.rightBarCopyButton, newsWebView.rightBarBookmarkButton
+            newsWebView.rightBarCopyButton,
+            newsWebView.rightBarBookmarkButton
         ]
     }
     
@@ -87,6 +86,7 @@ private extension NewsWebViewController {
         
         output.scrapedState
             .drive(onNext: {
+                print($0)
                 self.setupRightBarButton(with: $0)
             })
             .disposed(by: disposeBag)

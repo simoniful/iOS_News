@@ -26,7 +26,8 @@ final class NewsListViewHeader: UITableViewHeaderFooterView {
         self.tags = tags
         self.delegate = delegate
         contentView.backgroundColor = .systemBackground
-        setupLayout()
+        setupView()
+        setupConstraints()
         let prevTags = tagCollectionView.allTags().compactMap { tag in
             "\(tag.content)"
                 .replacingOccurrences(
@@ -52,15 +53,19 @@ extension NewsListViewHeader: TTGTextTagCollectionViewDelegate {
     }
 }
 
-private extension NewsListViewHeader {
-    func setupLayout() {
+extension NewsListViewHeader: ViewRepresentable {
+    func setupView() {
         addSubview(tagCollectionView)
-        
+    }
+    
+    func setupConstraints() {
         tagCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
-    
+}
+
+private extension NewsListViewHeader {
     func setupTagCollectionView() {
         tagCollectionView.delegate = self
         

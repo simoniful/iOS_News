@@ -25,21 +25,6 @@ extension Coordinator {
         delegate?.didFinish(childCoordinator: self)
     }
 
-    func findCoordinator(type: CoordinatorStyleCase) -> Coordinator? {
-        var stack: [Coordinator] = [self]
-
-        while !stack.isEmpty {
-            let currentCoordinator = stack.removeLast()
-            if currentCoordinator.type == type {
-                return currentCoordinator
-            }
-            currentCoordinator.childCoordinators.forEach({ child in
-                stack.append(child)
-            })
-        }
-        return nil
-    }
-
     func changeAnimation() {
         if let window = UIApplication.shared.windows.first {
             UIView.transition(with: window,

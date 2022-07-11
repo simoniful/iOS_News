@@ -8,8 +8,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import UIKit
-
 
 final class NewsListViewModel: NSObject, ViewModel {
     var disposeBag = DisposeBag()
@@ -17,7 +15,7 @@ final class NewsListViewModel: NSObject, ViewModel {
     weak var coordinator: NewsListCoordinator?
     private let searchUseCase: SearchUseCase
     
-    private var tags: [String] = ["IT", "개발", "iOS", "WWDC", "Apple"]
+    var tags: [String] = ["IT", "개발", "iOS", "WWDC", "Apple"]
     
     private var currentKeyword: String = ""
     private var currentPage: Int = 0
@@ -90,7 +88,6 @@ final class NewsListViewModel: NSObject, ViewModel {
             })
             .disposed(by: disposeBag)
         
-        
         return Output(
             newsList: newsList.asDriver(),
             reloadTable: reloadTable.asSignal(),
@@ -132,13 +129,6 @@ private extension NewsListViewModel {
     }
 }
 
-extension NewsListViewModel: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsListViewHeader.identifier) as? NewsListViewHeader else { return UITableViewHeaderFooterView() }
-        header.setup(tags: tags, delegate: self)
-        return header
-    }
-}
 
 extension NewsListViewModel: NewsTagmakerDelegate {
     func makeTags(_ tags: [String]) {

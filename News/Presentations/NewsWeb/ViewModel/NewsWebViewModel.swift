@@ -16,11 +16,7 @@ final class NewsWebViewModel: NSObject, ViewModel {
     
     weak var coordinator: Coordinator?
     private let dataBaseUseCase: DataBaseUseCase
-    var news: News {
-        didSet {
-            scrapedState.accept(news.isScraped)
-        }
-    }
+    var news: News
     var scrapedNews: ScrapedNews?
     
     init(
@@ -51,7 +47,7 @@ final class NewsWebViewModel: NSObject, ViewModel {
     
     let showToastAction = PublishRelay<String>()
     let indicatorAction = BehaviorRelay<Bool>(value: true)
-    let scrapedState = BehaviorRelay<Bool>(value: false)
+    lazy var scrapedState = BehaviorRelay<Bool>(value: news.isScraped)
     
     func transform(input: Input) -> Output {
         input.rightBarCopyButtonTapped

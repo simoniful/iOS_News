@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import SnapKit
 
-final class NewsWebView: UIView, ViewRepresentable {
+final class NewsWebView: UIView {
     lazy var rightBarCopyButton: UIBarButtonItem = {
         let barButton = UIBarButtonItem()
         barButton.image = UIImage(systemName: "link")
@@ -45,7 +45,9 @@ final class NewsWebView: UIView, ViewRepresentable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension NewsWebView: ViewRepresentable {
     func setupView() {
         [webView, indicatorView].forEach {
             addSubview($0)
