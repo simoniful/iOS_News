@@ -35,4 +35,8 @@ extension String {
             return nil
         }
     }
+    
+    var isBlank: Bool {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 }

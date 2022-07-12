@@ -28,16 +28,19 @@ final class NewsTagmakerViewCell: UICollectionViewCell {
     }
     
     func setup(tag: String) {
-        setupLayout()
+        setupView()
+        setupConstraints()
         tagButton.setTitle(tag, for: .normal)
         layoutIfNeeded()
     }
 }
 
-private extension NewsTagmakerViewCell {
-    func setupLayout() {
+extension NewsTagmakerViewCell: ViewRepresentable {
+    func setupView() {
         contentView.addSubview(tagButton)
-        
+    }
+    
+    func setupConstraints() {
         tagButton.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(8.0)

@@ -46,12 +46,23 @@ final class NewsListCoordinator: Coordinator {
     ) {
         let vc = UINavigationController(
             rootViewController: NewsTagmakerViewController(
-                tags: tags,
-                newsTagmakerDelegate: newsTagmakerDelegate
+                viewModel: NewsTagmakerViewModel(
+                    coordinator: self,
+                    newsTagmakerDelegate: newsTagmakerDelegate,
+                    tags: tags
+                )
             )
         )
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
+    }
+    
+    func dismissToNewsListViewController(message: String? = nil) {
+        navigationController.dismiss(animated: true) {
+            if let message = message {
+                self.navigationController.view.makeToast(message, position: .bottom)
+            }
+        }
     }
     
     func popToRootViewController(message: String? = nil) {

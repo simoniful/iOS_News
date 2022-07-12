@@ -44,6 +44,7 @@ final class NewsListViewModel: NSObject, ViewModel {
         let scrollToTop: Signal<Void>
     }
     
+    
     private let newsList = BehaviorRelay<[News]>(value: [])
     private let reloadTable = PublishRelay<Void>()
     private let endRefreshing = PublishRelay<Void>()
