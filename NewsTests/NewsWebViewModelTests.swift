@@ -8,10 +8,16 @@
 import XCTest
 import CoreData
 import WebKit
+import RxSwift
+import RxTest
+
 @testable import News
 
-class NewsWebPresenterTests: XCTestCase {
-    var sut: NewsWebPresenter!
+class NewsWebViewModelTests: XCTestCase {
+    let disposeBag = DisposeBag()
+    
+    var coordinator: Coordinator!
+    var sut: NewsWebViewModel!
     var dataBaseUseCase: DataBaseUseCase!
     var viewController: MockNewsWebViewController!
     var news: News!
@@ -21,8 +27,7 @@ class NewsWebPresenterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        viewController = MockNewsWebViewController()
+        coordinator = MockNewsListCoordinator(UINavigationController())
         dataBaseUseCase = DataBaseUseCase(repository: coreDataManager)
         news = News(
             title: "\'토종\' 코로나 백신 나온다...원료~완제품 이달내 허가",
@@ -33,8 +38,8 @@ class NewsWebPresenterTests: XCTestCase {
             isScraped: false
         )
         
-        sut = NewsWebPresenter(
-            viewController: viewController,
+        sut = NewsWebViewModel(
+            coordinator: coordinator,
             dataBaseUseCase: dataBaseUseCase,
             news: news,
             scrapedNews: nil
@@ -45,17 +50,23 @@ class NewsWebPresenterTests: XCTestCase {
         sut = nil
         news = nil
         dataBaseUseCase = nil
-        viewController = nil
+        coordinator = nil
         
         super.tearDown()
     }
     
-    func test_viewDidLoad가_요청될_때() {
-        sut.viewDidLoad()
+    func test_WebView가_로딩됬을_때() {
+        let scheduler = TestScheduler(initialClock: 0)
         
-        XCTAssertTrue(viewController.isCalledSetupWebView)
-        XCTAssertTrue(viewController.isCalledSetupNavigationBar)
-        XCTAssertTrue(viewController.isCalledSetRightBarButton)
+        let webViewLoadedEvent = scheduler.createHotObservable([
+            .next(1, navigation)
+        ])
+        
+        let webViewLoaded = PublishSubject<WKNavigation>()
+        
+        webViewLoadedEvent
+            .subscribe(webViewLoaded)
+            .disposed(by: disposeBag)
     }
     
     func test_didTapRightBarCopyButton가_요청될_때() {

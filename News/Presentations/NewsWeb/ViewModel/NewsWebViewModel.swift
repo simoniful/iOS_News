@@ -55,7 +55,6 @@ final class NewsWebViewModel: NSObject, ViewModel {
                 guard let self = self else { return }
                 UIPasteboard.general.string = self.news.originallink
                 self.showToastAction.accept(ToastCase.copied.description)
-                
             })
             .disposed(by: disposeBag)
         
@@ -64,14 +63,9 @@ final class NewsWebViewModel: NSObject, ViewModel {
                 guard let self = self else { return }
                 self.news.isScraped.toggle()
                 if self.news.isScraped {
-                    self.dataBaseUseCase.saveNews(item: self.news)
-                    let request: NSFetchRequest<ScrapedNews> = ScrapedNews.fetchRequest()
-                    request.predicate = NSPredicate(format: "title CONTAINS %@", self.news.title)
-                    self.scrapedNews = self.dataBaseUseCase.fetchData(request: request).first
+                    self.setNewsScrapped()
                 } else {
-                    if let scrapedNews = self.scrapedNews {
-                        self.dataBaseUseCase.deleteNews(object: scrapedNews)
-                    }
+                    self.setNewsUnscrapped()
                 }
                 self.scrapedState.accept(self.news.isScraped)
             })
@@ -91,6 +85,22 @@ final class NewsWebViewModel: NSObject, ViewModel {
             indicatorAction: indicatorAction.asDriver(),
             scrapedState: scrapedState.asDriver()
         )
+    }
+}
+
+private extension NewsWebViewModel {
+    // TODO: 의존성 관련 고민
+    func setNewsScrapped() {
+        dataBaseUseCase.saveNews(item: news)
+        let request: NSFetchRequest<ScrapedNews> = ScrapedNews.fetchRequest()
+        request.predicate = NSPredicate(format: "title CONTAINS %@", news.title)
+        scrapedNews = dataBaseUseCase.fetchData(request: request).first
+    }
+    
+    func setNewsUnscrapped() {
+        if let scrapedNews = scrapedNews {
+            dataBaseUseCase.deleteNews(object: scrapedNews)
+        }
     }
 }
 

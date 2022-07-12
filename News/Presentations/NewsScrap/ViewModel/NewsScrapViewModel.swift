@@ -47,15 +47,7 @@ final class NewsScrapViewModel: NSObject, ViewModel {
         input.didSelectRowAt
             .emit(onNext: { [weak self] scrapedNews in
                 guard let self = self else { return }
-                let news = News(
-                    title: scrapedNews.title ?? "",
-                    originallink: scrapedNews.originallink ?? "",
-                    link: scrapedNews.link ?? "",
-                    desc: scrapedNews.desc ?? "",
-                    pubDate: scrapedNews.pubDate ?? "",
-                    isScraped: scrapedNews.isScraped
-                )
-                
+                let news = News(scrapedNews: scrapedNews)
                 self.coordinator?.pushNewsWebViewController(
                     news: news, scrapedNews: scrapedNews
                 )
@@ -69,7 +61,6 @@ final class NewsScrapViewModel: NSObject, ViewModel {
                 self.dataBaseUseCase.deleteNews(object: deleteOne)
                 let newValue = self.scrapedNewsList.value.filter { $0 != deleteOne }
                 self.scrapedNewsList.accept(newValue)
-                
             })
             .disposed(by: disposeBag)
         

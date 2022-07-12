@@ -44,7 +44,6 @@ final class NewsListViewModel: NSObject, ViewModel {
         let scrollToTop: Signal<Void>
     }
     
-    
     private let newsList = BehaviorRelay<[News]>(value: [])
     private let reloadTable = PublishRelay<Void>()
     private let endRefreshing = PublishRelay<Void>()
@@ -55,7 +54,8 @@ final class NewsListViewModel: NSObject, ViewModel {
             .emit(onNext: { [weak self] news in
                 guard let self = self else { return }
                 self.coordinator?.pushNewsWebViewController(
-                    news: news, scrapedNews: nil
+                    news: news,
+                    scrapedNews: nil
                 )
             })
             .disposed(by: disposeBag)

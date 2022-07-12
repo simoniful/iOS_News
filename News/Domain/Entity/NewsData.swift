@@ -22,3 +22,14 @@ struct News {
     let pubDate: String
     var isScraped: Bool
 }
+
+extension News {
+    init(scrapedNews: ScrapedNews) {
+        self.title = scrapedNews.title ?? ""
+        self.originallink = scrapedNews.title ?? ""
+        self.link = scrapedNews.link ?? ""
+        self.desc = scrapedNews.desc ?? ""
+        self.pubDate = scrapedNews.pubDate ?? ""
+        self.isScraped = scrapedNews.isScraped
+    }
+}
