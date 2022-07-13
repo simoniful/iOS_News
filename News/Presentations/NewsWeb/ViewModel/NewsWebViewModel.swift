@@ -20,7 +20,7 @@ final class NewsWebViewModel: NSObject, ViewModel {
     var scrapedNews: ScrapedNews?
     
     init(
-        coordinator: Coordinator,
+        coordinator: Coordinator?,
         dataBaseUseCase: DataBaseUseCase = DataBaseUseCase(
             repository: CoreDataManager.shared
         ),
@@ -45,9 +45,9 @@ final class NewsWebViewModel: NSObject, ViewModel {
         let scrapedState: Driver<Bool>
     }
     
-    let showToastAction = PublishRelay<String>()
-    let indicatorAction = BehaviorRelay<Bool>(value: true)
-    lazy var scrapedState = BehaviorRelay<Bool>(value: news.isScraped)
+    private let showToastAction = PublishRelay<String>()
+    private let indicatorAction = BehaviorRelay<Bool>(value: true)
+    private lazy var scrapedState = BehaviorRelay<Bool>(value: news.isScraped)
     
     func transform(input: Input) -> Output {
         input.rightBarCopyButtonTapped
@@ -63,9 +63,10 @@ final class NewsWebViewModel: NSObject, ViewModel {
                 guard let self = self else { return }
                 self.news.isScraped.toggle()
                 if self.news.isScraped {
-                    self.setNewsScrapped()
+                    self.setNewsScraped(news: self.news)
                 } else {
-                    self.setNewsUnscrapped()
+                    guard let scrapedNews = self.scrapedNews else { return }
+                    self.setNewsUnscraped(scrapedNews: scrapedNews)
                 }
                 self.scrapedState.accept(self.news.isScraped)
             })
@@ -89,18 +90,15 @@ final class NewsWebViewModel: NSObject, ViewModel {
 }
 
 private extension NewsWebViewModel {
-    // TODO: 의존성 관련 고민
-    func setNewsScrapped() {
+    func setNewsScraped(news: News) {
         dataBaseUseCase.saveNews(item: news)
         let request: NSFetchRequest<ScrapedNews> = ScrapedNews.fetchRequest()
         request.predicate = NSPredicate(format: "title CONTAINS %@", news.title)
         scrapedNews = dataBaseUseCase.fetchData(request: request).first
     }
     
-    func setNewsUnscrapped() {
-        if let scrapedNews = scrapedNews {
-            dataBaseUseCase.deleteNews(object: scrapedNews)
-        }
+    func setNewsUnscraped(scrapedNews: ScrapedNews) {
+        dataBaseUseCase.deleteNews(object: scrapedNews)
     }
 }
 

@@ -32,14 +32,6 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: CoordinatorDelegate {
     func didFinish(childCoordinator: Coordinator) {
-        self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
-        self.navigationController.viewControllers.removeAll()
-
-        switch childCoordinator.type {
-        case .tab:
-            self.connectTabBarFlow()
-        default:
-            break
-        }
+        finish()
     }
 }

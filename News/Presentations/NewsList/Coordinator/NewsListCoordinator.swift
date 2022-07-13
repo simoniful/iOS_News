@@ -64,11 +64,4 @@ final class NewsListCoordinator: Coordinator {
             }
         }
     }
-    
-    func popToRootViewController(message: String? = nil) {
-        navigationController.popToRootViewController(animated: true)
-        if let message = message {
-            navigationController.view.makeToast(message, position: .top)
-        }
-    }
 }

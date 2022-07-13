@@ -8,21 +8,17 @@
 import UIKit
 import SnapKit
 
-final class NewsListView: UIView, ViewRepresentable {
+final class NewsListView: UIView {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(NewsListViewCell.self, forCellReuseIdentifier: NewsListViewCell.identifier)
         tableView.register(NewsListViewHeader.self, forHeaderFooterViewReuseIdentifier: NewsListViewHeader.identifier)
         tableView.refreshControl = refreshControl
-//        tableView.dataSource = presenter
-//        tableView.delegate = presenter
-//        tableView.prefetchDataSource = presenter
         return tableView
     }()
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-//        refreshControl.addTarget(self, action: #selector(didCalledRefresh), for: .valueChanged)
         return refreshControl
     }()
     
@@ -38,7 +34,6 @@ final class NewsListView: UIView, ViewRepresentable {
             withConfiguration: largeConfig
         )
         button.setImage(largeBoldPlus, for: .normal)
-//        button.addTarget(self, action: #selector(didTapRightBarButton), for: .touchUpInside)
         button.tag = 1
         return button
     }()
@@ -52,7 +47,9 @@ final class NewsListView: UIView, ViewRepresentable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension NewsListView: ViewRepresentable {
     func setupView() {
         addSubview(tableView)
     }

@@ -39,12 +39,14 @@ final class NewsListViewModel: NSObject, ViewModel {
     
     struct Output {
         let newsList: Driver<[News]>
+        let showToastAction: Signal<String>
         let reloadTable: Signal<Void>
         let endRefreshing: Signal<Void>
         let scrollToTop: Signal<Void>
     }
     
     private let newsList = BehaviorRelay<[News]>(value: [])
+    private let showToastAction = PublishRelay<String>()
     private let reloadTable = PublishRelay<Void>()
     private let endRefreshing = PublishRelay<Void>()
     private let scrollToTop = PublishRelay<Void>()
@@ -91,6 +93,7 @@ final class NewsListViewModel: NSObject, ViewModel {
         
         return Output(
             newsList: newsList.asDriver(),
+            showToastAction: showToastAction.asSignal(),
             reloadTable: reloadTable.asSignal(),
             endRefreshing: endRefreshing.asSignal(),
             scrollToTop: scrollToTop.asSignal()
@@ -124,7 +127,7 @@ private extension NewsListViewModel {
                         self.scrollToTop.accept(())
                     }
                 case .failure(let error):
-                    print(error)
+                    self.showToastAction.accept(error.errorDescription)
                 }
             })
     }

@@ -14,20 +14,22 @@ import RxTest
 @testable import News
 
 class NewsWebViewModelTests: XCTestCase {
-    let disposeBag = DisposeBag()
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    private var input: NewsWebViewModel.Input!
+    private var output: NewsWebViewModel.Output!
     
-    var coordinator: Coordinator!
-    var sut: NewsWebViewModel!
-    var dataBaseUseCase: DataBaseUseCase!
-    var viewController: MockNewsWebViewController!
-    var news: News!
-    var coreDataManager =  MockCoreDataManager()
+    private var viewModel: NewsWebViewModel!
+    private var coreDataManager =  MockCoreDataManager()
+    private var dataBaseUseCase: DataBaseUseCase!
+    private var news: News!
     
-    let navigation = WKNavigation()
+    private var navigation = WKNavigation()
     
     override func setUp() {
         super.setUp()
-        coordinator = MockNewsListCoordinator(UINavigationController())
+        disposeBag = DisposeBag()
+        scheduler = TestScheduler(initialClock: 0)
         dataBaseUseCase = DataBaseUseCase(repository: coreDataManager)
         news = News(
             title: "\'토종\' 코로나 백신 나온다...원료~완제품 이달내 허가",
@@ -38,8 +40,8 @@ class NewsWebViewModelTests: XCTestCase {
             isScraped: false
         )
         
-        sut = NewsWebViewModel(
-            coordinator: coordinator,
+        viewModel = NewsWebViewModel(
+            coordinator: nil,
             dataBaseUseCase: dataBaseUseCase,
             news: news,
             scrapedNews: nil
@@ -47,54 +49,65 @@ class NewsWebViewModelTests: XCTestCase {
     }
     
     override func tearDown() {
-        sut = nil
+        viewModel = nil
         news = nil
         dataBaseUseCase = nil
-        coordinator = nil
-        
+        scheduler = nil
+        disposeBag = nil
         super.tearDown()
     }
     
-    func test_WebView가_로딩됬을_때() {
-        let scheduler = TestScheduler(initialClock: 0)
-        
-        let webViewLoadedEvent = scheduler.createHotObservable([
-            .next(1, navigation)
+    func test_rightBarBookmarkButtonTapped가_요청될_때_news의_isScraped가_false라면() {
+        let rightBarCopyButtonTappedEvent = scheduler.createHotObservable([
+            .next(2, ())
+        ])
+
+        let rightBarBookmarkButtonTappedEvent = scheduler.createHotObservable([
+            .next(1, ())
         ])
         
-        let webViewLoaded = PublishSubject<WKNavigation>()
+        let webViewLoadedEvent = scheduler.createHotObservable([
+            .next(0, navigation)
+        ])
         
-        webViewLoadedEvent
-            .subscribe(webViewLoaded)
-            .disposed(by: disposeBag)
-    }
-    
-    func test_didTapRightBarCopyButton가_요청될_때() {
-        sut.didTapRightBarCopyButton()
+        input = NewsWebViewModel.Input(
+            rightBarCopyButtonTapped: rightBarCopyButtonTappedEvent.asSignal(onErrorJustReturn: ()),
+            rightBarBookmarkButtonTapped: rightBarBookmarkButtonTappedEvent.asSignal(onErrorJustReturn: ()),
+            webViewLoaded: webViewLoadedEvent.asObservable()
+        )
+        output = viewModel.transform(input: input)
         
-        XCTAssertTrue(viewController.isCalledShowToast)
-    }
-    
-    func test_didTapRightBarBookmarkButton가_요청될_때_news의_isScraped가_false라면() {
-        sut.didTapRightBarBookmarkButton()
+        scheduler.start()
         
         XCTAssertTrue(coreDataManager.isCalledSaveNews)
         XCTAssertTrue(coreDataManager.isCalledFetchData)
-        XCTAssertTrue(viewController.isCalledSetRightBarButton)
     }
     
-    func test_didTapRightBarBookmarkButton가_요청될_때_news의_isScraped가_true라면() {
-        sut.news.isScraped = true
-        sut.scrapedNews = ScrapedNews()
-        sut.didTapRightBarBookmarkButton()
+    func test_rightBarBookmarkButtonTapped가_요청될_때_news의_isScraped가_true라면() {
+        viewModel.news.isScraped = true
+        viewModel.scrapedNews = ScrapedNews()
+        
+        let rightBarCopyButtonTappedEvent = scheduler.createHotObservable([
+            .next(2, ())
+        ])
+
+        let rightBarBookmarkButtonTappedEvent = scheduler.createHotObservable([
+            .next(1, ())
+        ])
+        
+        let webViewLoadedEvent = scheduler.createHotObservable([
+            .next(0, navigation)
+        ])
+        
+        input = NewsWebViewModel.Input(
+            rightBarCopyButtonTapped: rightBarCopyButtonTappedEvent.asSignal(onErrorJustReturn: ()),
+            rightBarBookmarkButtonTapped: rightBarBookmarkButtonTappedEvent.asSignal(onErrorJustReturn: ()),
+            webViewLoaded: webViewLoadedEvent.asObservable()
+        )
+        output = viewModel.transform(input: input)
+        
+        scheduler.start()
         
         XCTAssertTrue(coreDataManager.isCalledDeleteNews)
-        XCTAssertTrue(viewController.isCalledSetRightBarButton)
-    }
-    
-    func test_WebView에서_didFinish가_요청될_때() {
-        sut.webView(WKWebView(), didFinish: navigation)
-        
-        XCTAssertTrue(viewController.isCalledStopIndicator)
     }
 }

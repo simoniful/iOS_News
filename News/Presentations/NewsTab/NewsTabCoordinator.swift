@@ -82,10 +82,6 @@ final class NewsTabCoordinator: Coordinator {
 
 extension NewsTabCoordinator: CoordinatorDelegate {
     func didFinish(childCoordinator: Coordinator) {
-        self.childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
-//        if childCoordinator.type == . {
-//            self.navigationController.viewControllers.removeAll()
-//            self.delegate?.didFinish(childCoordinator: self)
-//        }
+        self.delegate?.didFinish(childCoordinator: self)
     }
 }

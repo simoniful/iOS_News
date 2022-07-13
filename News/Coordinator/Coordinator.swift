@@ -27,10 +27,12 @@ extension Coordinator {
 
     func changeAnimation() {
         if let window = UIApplication.shared.windows.first {
-            UIView.transition(with: window,
-                              duration: 0.5,
-                              options: .transitionCrossDissolve,
-                              animations: nil)
+            UIView.transition(
+                with: window,
+                duration: 0.5,
+                options: .transitionCrossDissolve,
+                animations: nil
+            )
         }
     }
 }

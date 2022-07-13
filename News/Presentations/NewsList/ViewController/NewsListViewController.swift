@@ -115,6 +115,12 @@ private extension NewsListViewController {
                 self?.newsListView.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+        
+        output.showToastAction
+            .emit(onNext: { [weak self] text in
+                self?.view.makeToast(text)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
