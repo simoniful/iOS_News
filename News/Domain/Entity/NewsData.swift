@@ -14,13 +14,18 @@ struct NewsData {
     let display: Int
 }
 
-struct News {
+// TODO: 관리에 있어서 Identifiable 준수 필요
+struct News: Equatable {
     let title: String
     let originallink: String
     let link: String
     let desc: String
     let pubDate: String
     var isScraped: Bool
+    
+    static func == (lhs: News, rhs: News) -> Bool {
+        return lhs.title == rhs.title
+    }
 }
 
 extension News {

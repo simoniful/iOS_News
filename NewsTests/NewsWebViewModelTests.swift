@@ -1,5 +1,5 @@
 //
-//  NewsWebPresenterTests.swift
+//  NewsWebViewModelTests.swift
 //  NewsTests
 //
 //  Created by Sang hun Lee on 2022/07/02.
@@ -13,7 +13,7 @@ import RxTest
 
 @testable import News
 
-class NewsWebViewModelTests: XCTestCase {
+final class NewsWebViewModelTests: XCTestCase {
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
     private var input: NewsWebViewModel.Input!
@@ -31,6 +31,7 @@ class NewsWebViewModelTests: XCTestCase {
         disposeBag = DisposeBag()
         scheduler = TestScheduler(initialClock: 0)
         dataBaseUseCase = DataBaseUseCase(repository: coreDataManager)
+        // TODO: Mock 분리
         news = News(
             title: "\'토종\' 코로나 백신 나온다...원료~완제품 이달내 허가",
             originallink: "http://www.seouleconews.com/news/articleView.html?idxno=66852",

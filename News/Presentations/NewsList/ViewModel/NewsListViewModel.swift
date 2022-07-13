@@ -23,7 +23,7 @@ final class NewsListViewModel: NSObject, ViewModel {
     private let display: Int = 20
     
     init(
-        coordinator: NewsListCoordinator,
+        coordinator: NewsListCoordinator?,
         searchUseCase: SearchUseCase
     ) {
         self.coordinator = coordinator
@@ -45,7 +45,7 @@ final class NewsListViewModel: NSObject, ViewModel {
         let scrollToTop: Signal<Void>
     }
     
-    private let newsList = BehaviorRelay<[News]>(value: [])
+    let newsList = BehaviorRelay<[News]>(value: [])
     private let showToastAction = PublishRelay<String>()
     private let reloadTable = PublishRelay<Void>()
     private let endRefreshing = PublishRelay<Void>()
