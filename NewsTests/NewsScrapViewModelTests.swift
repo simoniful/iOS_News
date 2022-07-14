@@ -28,7 +28,6 @@ final class NewsScrapViewModelTests: XCTestCase {
         disposeBag = DisposeBag()
         scheduler = TestScheduler(initialClock: 0)
         dataBaseUseCase = DataBaseUseCase(repository: coreDataManager)
-        
         viewModel = NewsScrapViewModel(
             coordinator: nil,
             dataBaseUseCase: dataBaseUseCase
