@@ -49,7 +49,7 @@ final class NewsTagmakerViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_입력_후_버튼_동작_및_태그_선택_시_삭제_성공() {
+    func test_입력_후_버튼_동작_및_태그_선택_시_삭제_성공한다면() {
         let didSelectItemAtEvent = scheduler.createHotObservable([
             .next(3, IndexPath(row: 5, section: 0))
         ])
