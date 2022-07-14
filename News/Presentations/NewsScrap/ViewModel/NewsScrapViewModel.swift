@@ -16,7 +16,7 @@ final class NewsScrapViewModel: NSObject, ViewModel {
     private let dataBaseUseCase: DataBaseUseCase
     
     init(
-        coordinator: NewsScrapCoordinator,
+        coordinator: NewsScrapCoordinator?,
         dataBaseUseCase: DataBaseUseCase = DataBaseUseCase(
             repository: CoreDataManager.shared
         )

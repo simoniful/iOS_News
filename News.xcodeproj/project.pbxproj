@@ -31,7 +31,6 @@
 		F41E914A287BFBFE001AD18D /* NewsTagmakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E9149287BFBFE001AD18D /* NewsTagmakerView.swift */; };
 		F41E914C287BFD44001AD18D /* NewsTagmakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E914B287BFD44001AD18D /* NewsTagmakerViewModel.swift */; };
 		F46BDD70286FF59F00566151 /* NewsTagmakerPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46BDD6F286FF59F00566151 /* NewsTagmakerPresenterTests.swift */; };
-		F46BDD72286FF5BB00566151 /* NewsScrapPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46BDD71286FF5BB00566151 /* NewsScrapPresenterTests.swift */; };
 		F46BDD74286FF5D800566151 /* NewsWebViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46BDD73286FF5D800566151 /* NewsWebViewModelTests.swift */; };
 		F46BDD78286FF63700566151 /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46BDD77286FF63700566151 /* MockCoreDataManager.swift */; };
 		F48A394728656340002E0F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A394628656340002E0F94 /* AppDelegate.swift */; };
@@ -65,6 +64,8 @@
 		F4A1A47C2873F6AF00B64827 /* CoreDataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1A47B2873F6AF00B64827 /* CoreDataManagerProtocol.swift */; };
 		F4A1A47E2873F6FC00B64827 /* DataBaseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1A47D2873F6FC00B64827 /* DataBaseUseCase.swift */; };
 		F4DD9A1F287E740F00468E9C /* NewsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DD9A1E287E740F00468E9C /* NewsListViewModelTests.swift */; };
+		F4DD9A21287F1F8D00468E9C /* NewsScrapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DD9A20287F1F8C00468E9C /* NewsScrapViewModelTests.swift */; };
+		F4DD9A23287FBA7500468E9C /* NewsTagmakerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DD9A22287FBA7500468E9C /* NewsTagmakerViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +115,6 @@
 		F41E9149287BFBFE001AD18D /* NewsTagmakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewsTagmakerView.swift; path = /Users/simon/Desktop/FastCampus/News/News/Presentations/NewsTagmaker/View/NewsTagmakerView.swift; sourceTree = "<absolute>"; };
 		F41E914B287BFD44001AD18D /* NewsTagmakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTagmakerViewModel.swift; sourceTree = "<group>"; };
 		F46BDD6F286FF59F00566151 /* NewsTagmakerPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTagmakerPresenterTests.swift; sourceTree = "<group>"; };
-		F46BDD71286FF5BB00566151 /* NewsScrapPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScrapPresenterTests.swift; sourceTree = "<group>"; };
 		F46BDD73286FF5D800566151 /* NewsWebViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWebViewModelTests.swift; sourceTree = "<group>"; };
 		F46BDD77286FF63700566151 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
 		F48A394328656340002E0F94 /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +152,8 @@
 		F4A1A47B2873F6AF00B64827 /* CoreDataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerProtocol.swift; sourceTree = "<group>"; };
 		F4A1A47D2873F6FC00B64827 /* DataBaseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseUseCase.swift; sourceTree = "<group>"; };
 		F4DD9A1E287E740F00468E9C /* NewsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModelTests.swift; sourceTree = "<group>"; };
+		F4DD9A20287F1F8C00468E9C /* NewsScrapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScrapViewModelTests.swift; sourceTree = "<group>"; };
+		F4DD9A22287FBA7500468E9C /* NewsTagmakerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTagmakerViewModelTests.swift; sourceTree = "<group>"; };
 		FEB8EF78F376FE5A39CED285 /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -324,7 +326,8 @@
 			children = (
 				F46BDD73286FF5D800566151 /* NewsWebViewModelTests.swift */,
 				F4DD9A1E287E740F00468E9C /* NewsListViewModelTests.swift */,
-				F46BDD71286FF5BB00566151 /* NewsScrapPresenterTests.swift */,
+				F4DD9A20287F1F8C00468E9C /* NewsScrapViewModelTests.swift */,
+				F4DD9A22287FBA7500468E9C /* NewsTagmakerViewModelTests.swift */,
 				F46BDD6F286FF59F00566151 /* NewsTagmakerPresenterTests.swift */,
 				F48A399C28696C3C002E0F94 /* Mocks */,
 			);
@@ -903,11 +906,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46BDD74286FF5D800566151 /* NewsWebViewModelTests.swift in Sources */,
+				F4DD9A21287F1F8D00468E9C /* NewsScrapViewModelTests.swift in Sources */,
 				F48A3999286968CB002E0F94 /* MockNewsSearchManager.swift in Sources */,
+				F4DD9A23287FBA7500468E9C /* NewsTagmakerViewModelTests.swift in Sources */,
 				F46BDD70286FF59F00566151 /* NewsTagmakerPresenterTests.swift in Sources */,
 				F4DD9A1F287E740F00468E9C /* NewsListViewModelTests.swift in Sources */,
 				F46BDD78286FF63700566151 /* MockCoreDataManager.swift in Sources */,
-				F46BDD72286FF5BB00566151 /* NewsScrapPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

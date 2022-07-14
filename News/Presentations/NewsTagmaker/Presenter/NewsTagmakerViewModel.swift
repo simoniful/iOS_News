@@ -22,7 +22,7 @@ final class NewsTagmakerViewModel: NSObject, ViewModel {
     var keyword: String = ""
     
     init(
-        coordinator: NewsListCoordinator,
+        coordinator: NewsListCoordinator?,
         newsTagmakerDelegate: NewsTagmakerDelegate,
         tags: [String]
     ) {
