@@ -40,10 +40,10 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
 
 ViewModel의 unit test에 있어서 최대한 coverage를 만족시킬 것을 고려하고 필요에 따라 BDD처럼 조건 분기에 대한 처리를 통하여 테스트 케이스 분리했다. 테스트 구성에 있어서 MVP 패턴의 Presenter와 비교할 경우 커버리지는 상당히 높을 수 밖에 없었다. 하지만, In/Out 패턴에 대한 생각과 전반적인 커버리지가 아닌 구체적인 테스트 케이스를 어떻게 구성할 지 고민하게 되었다.
 
-<img src = "https://user-images.githubusercontent.com/75239459/177030264-64a065ec-05a1-4396-99b3-7b0ee18b5831.png" width = 500>
-<img src = "https://user-images.githubusercontent.com/75239459/177030259-da8e6b46-0388-4c92-8f31-241defb270fe.png" width = 500>
-<img src = "https://user-images.githubusercontent.com/75239459/177030261-499c8674-4ff2-41cd-9142-4daa90727436.png" width = 500>
-<img src = "https://user-images.githubusercontent.com/75239459/177030262-68ecfd8f-6064-4c6f-ab85-a07a696af0f6.png" width= 500>
+<img src = "https://user-images.githubusercontent.com/75239459/179142866-a446a50f-ab1e-43b8-a3ce-8a2b8da7425c.png" width = 500>
+<img src = "https://user-images.githubusercontent.com/75239459/179142934-7482a9f2-c7a9-45a4-94b7-114b1bf3ef44.png" width = 500>
+<img src = "https://user-images.githubusercontent.com/75239459/179142978-ff7fa1ee-7978-4116-b652-06db09efa5b7.png" width = 500>
+<img src = "https://user-images.githubusercontent.com/75239459/179143022-024d2771-ab7b-4a4e-9477-c7e8e3ce2dee.png" width= 500>
 
 #### Test에서 In/Out의 제한점과 테스트를 시나리오에 따라 분리 구성하는 방법에 대한 고민
 
