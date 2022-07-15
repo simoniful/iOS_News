@@ -27,100 +27,51 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
   + 스크랩 목록 관리
   + 스크랩 데이터 제거
 
-
 ## Getting Start
-> Swift, MVP, CI/CD, Unit Test, CoreData, WebKit, SnapKit, Alamofire, Toast-swift, TTGTagCollectionView
+> Swift, MVVM+C, CI/CD, Unit Test, CoreData, WebKit, SnapKit, Alamofire, Toast-swift, TTGTagCollectionView, RxCocoa, RxSwift, RxTest
 
-## Issue
+## Issue & Reflection
 
-### 1. TableView reloadData()에서 Section Header 영역 리로드로 인해서 Tag가 계속 추가적으로 생성되는 상황 발생
+### 1. Coordinator 구성 및  Tabbar / Navigation 연결
 
-Header의 내부 메서드 setup() 실행에 있어서 delegate는 유지하고 추가적인 생성은 분기처리를 통해 해결, 이전 tags의 요소 내 String 값에 접근하는 것이 제한적이라 가능한 접근하여 해당 배열을 생성하여 비교 후 태그 설정 하도록 분기 처리
-
-```swift
-func setup(tags: [String], delegate: NewsListViewHeaderDelegate) {
-        self.tags = tags
-        self.delegate = delegate
-        contentView.backgroundColor = .systemBackground
-        setupLayout()
-        let prevTags = tagCollectionView.allTags().compactMap { tag in
-            "\(tag.content)"
-                .replacingOccurrences(
-                    of: "<TTGTextTagStringContent: self.text=",
-                    with: ""
-                )
-                .replacingOccurrences(
-                    of: ">",
-                    with: ""
-                )
-        }
-        if prevTags != tags {
-            tagCollectionView.removeAllTags()
-            setupTagCollectionView()
-        }
-    }
-```
+처음 코디네이터 패턴을 구성하다 보니 이해하는데 꽤 시간이 들었다. `생성자 주입`을 통해 navigationController를 주입받고, 화면전환 시 해당 `navigationController`가 다음 화면을 push 하도록 구성했다.  확실히 직접적인 `ViewModel`에서의 ViewController 생성과 DI를 피하고 Container를 통해서 하다보니 View 자체에서는 Model에 대해서 더욱 알 수 없도록 구성했다는 점에선 만족이다. 조금 의문점은 화면전환 동작을 클로저 타입으로 actions에 저장하고, actions를 ViewModel의 init 시 주입하는 방법도 고려해봐야 할 거 같다.
 
 ### 2. Test Coverage
-Presenter의 unit test에 있어서 최대한 coverage를 만족시킬 것을 고려하고 필요에 따라 BDD처럼 조건 분기에 대한 처리를 통하여 테스트 케이스 분리
+
+ViewModel의 unit test에 있어서 최대한 coverage를 만족시킬 것을 고려하고 필요에 따라 BDD처럼 조건 분기에 대한 처리를 통하여 테스트 케이스 분리했다. 테스트 구성에 있어서 MVP 패턴의 Presenter와 비교할 경우 커버리지는 상당히 높을 수 밖에 없었다. 하지만, In/Out 패턴에 대한 생각과 전반적인 커버리지가 아닌 구체적인 테스트 케이스를 어떻게 구성할 지 고민하게 되었다.
 
 <img src = "https://user-images.githubusercontent.com/75239459/177030264-64a065ec-05a1-4396-99b3-7b0ee18b5831.png" width = 500>
 <img src = "https://user-images.githubusercontent.com/75239459/177030259-da8e6b46-0388-4c92-8f31-241defb270fe.png" width = 500>
 <img src = "https://user-images.githubusercontent.com/75239459/177030261-499c8674-4ff2-41cd-9142-4daa90727436.png" width = 500>
 <img src = "https://user-images.githubusercontent.com/75239459/177030262-68ecfd8f-6064-4c6f-ab85-a07a696af0f6.png" width= 500>
 
+#### Test에서 In/Out의 제한점과 테스트를 시나리오에 따라 분리 구성하는 방법에 대한 고민
 
-### 3. Bitrise 사용 CI / CD 환경 구축 시 Secrets 구성 이슈
+내부 구조체에 얽매이다 보니 전체에 대한 Default Input 이벤트를 구성해서 테스트 케이스를 구성하게 되었다. 전반적인 테스트 시행에 있어서는 장점도 있었지만 스트림을 분기 단위 별로 시나리오에 맞춰 구성하는 데 제약이 있었던 거 같다. 따라서, 분리해서 적잘한 스트림을 전달하는 방식과 혹은 모델 단위별로 분리해서 내부의 로직만 확인하도록 구성하는 방법도 생각해봐야한다.
 
-기존에는 .xcconfig 확장자의 파일로 관리하면서 API Key를 관리했었다. 하지만, CI 환경을 구성하고 리모트 빌드 되는 환경에서 해당 파일은 .gitignore에 의해서 업로딩이 제한되고 결국에는 빌드가 되지 않는 문제가 발생했다.
+아키텍쳐에 집중하여 아주 작은 수준의 프로젝트를 진행하다보니 복잡한 수준의 기능이 없어서 구현에는 큰 어려움이 없었다. 하지만, 실제 프로젝트에선 복잡한 뷰나 기능 구현과 뷰의 애니메이션 같은 경우에도 고려하여 다음 프로젝트 때에는 조금은 더 신경 써봐야겠다. UI Test도 포함해서 말이다.
 
-이럴 경우, fastLane, github action, jenkins 등 다른 솔루션들도 secrets와 env var를 제공하면서 내부에서 보안적인 경우를 해결 할 수 있도록 구성이 가능하다고 한다.
+### 3. Rx In/Out 형식의 ViewModel 구성 및 처리
 
-따라서, 기존의 활용하던 .xcconfig를 걷어내고 간단하게 bitrise상에서 secrets를 변수로 설정하고 해당 값을 가져오는 방식으로 바꾸어 우선은 repo에 commit 해두었고 remote build 상 문제없이 구성할 수 있었다.
+Signal, Drive 등의 Traits를 적극적으로 활용했다. 하지만 구성하면서 의문이 생긴 건 emit(), drive() 등 onNext 내부에 로직을 구성하는 것이 아닌 외부로 정리해서 분리하는 것도 방법이라고 생각했다. 확실히 ViewModel이 되면서 코드의 양은 줄었지만, 코드의 흐름을 확실히 보기 위해서 말이다. 가독성의 측면에서는 굉장히 예전 코드에 비해선 개선이 많이 되었다.
 
-<img src = "https://user-images.githubusercontent.com/75239459/176087060-3ee299b9-da95-43bf-ac53-cfe142014e79.png" width = 500>
+Operator 활용에 있어서도 기존에 튜토리얼 보다 제한적인 수준에 의존한 느낌이 강해서 UI 인터렉션, 데이터 필터 등 구체적으로 확실하게 쓴 예제들을 참고하여 사용성에 대해서 고민해봐야겠다. 단순한 사용이 아닌 필터, 합성, take 등 고려할 부분을 옵션처럼 활용할 수 있을 때 까지 연습을 더 해봐야할 거 같다. 좋은 기능이 많은데 다 못 쓰는 느낌이 크다.
 
-+ [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 1](https://medium.com/hongbeomi-dev/bitrise%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-ci-cd-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0-1-firebase-distribution-cd522d53465c)
-+ [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 2](https://www.youtube.com/watch?v=PGh_RPYA45w)
-+ [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 3](https://www.runway.team/blog/how-to-set-up-a-ci-cd-pipeline-ios-app-using-bitrise)
-+ [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 4](https://stackoverflow.com/questions/65828851/how-to-access-bitrise-secret-environment-variable-in-swift-code)
-+ [환경 변수 설정 및 Secret 구성을 통한 관리 방식 레퍼런스 5](https://ios-development.tistory.com/749)
+### 4. 상태 및 데이터 전달 방식에 대한 고민
 
-### 4. CoreData를 이용한 기사 스크랩 관련 모델 문제
+Delegate, Closure를 통한 Scene 사이에서의 짧은 거리 수준의 전달과 Notification을 통한 긴 거리 수준의 전달에 대한 고민을 항상 하는 것 같다. 이번에는 헤더 부분을 서드 파티에 의존하면서 하다 보니 간단한 데이터 전달에 있어서는 delegate를 활용하였는데 쓰면서 순환 참조를 잘 고려해야할 듯, Delegate를 사용할 때에 항상 AnyObject를 잘 달자! Delegate property는 weak로 선언해야 한다!
 
-기존에 다루던 News 구조체와 CoreData에서 쓰는 ScrapedNews 구조체의 형태는 동일하나 다르게 쓸 수 밖에 없었다. 외부에서 가져오는 엔티티의 형태와 동일 하더라도 내부의 Database에 쓰인다는 의미는 아무래도 불변성에 근거하여 이를 임의적으로 수정하는 건 제한하는 것 같았다. 따라서, 서로 다른 네이밍으로 관리하고 필요에 따라서 DB에서 가져온 데이터를 파싱하여 엔티티의 데이터 형태로 사용하는게 오히려 안전하다고 생각되어 우선은 분리한 채 작업을 진행해두었다.
+### 5. 네트워크 구현 및 API 추상화
 
-#### CoreData 활용과 유닛 테스트
+RxSwift를 활용하여 비동기 작업을 처리했지만. 서버에서 받아온 데이터는 일반 타입으로 전달하고 해당 스트림에 주입하는 방식으로 현재는 구성해있다. 아무래도 단일 API 호출과 관련하여 가볍게 여기고 작업을 진행한 점이 가장 크지 않을까? 그래서 Moya 등의 서드파티를 사용했을 때가 생각이 났고, 여러 개의 API 호출 시의 쓰레드 관리와 해당 case 관리를 보다 편할 방법을 고민 중이다. 열거형이 아닌 API마다 독립적인 구조체 타입으로 관리하는 방법을 토대로 코드유지 보수가 용이하도록 보완해보는 방식도 나쁘지 않을 듯
 
-MockData를 구성함에 있어서 분리가 있다보니 마음대로 조작된 데이터를 주입하기가 까다로웠다. 간단하게 전달되는 함수만 구현하는 것이 아닌 실제로 DB 내부에 데이터를 주입하고 테스트하는 방식을 고려하게 되면서 기존에 있던 가벼운 수준의 Test Mock을 덜어내고 다시 구성을 시작했다. 구체적으로 CoreData를 경유하여 News 값을 전달하고 삭제하는 로직을 추가하여 구성하였다.
+### 5. 클린 아키텍쳐
 
-[참고 레퍼런스](https://medium.com/tiendeo-tech/ios-how-to-unit-test-core-data-eb4a754f2603)
-[참고 레퍼런스 레포](https://github.com/Haeuncs/MemoApp/blob/master/MemoAppTests/MemoAppTests.swift)
+이번 계기로 실제 Robert C. Martin 의 Clean Arichitecture를 읽어보고 swift 형태로 구성된 가장 유명한 [예제 레포](https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/tree/master/ExampleMVVM)를 참고 했다. 확실히 고민하던 부분에 대한 해소를 통해서 아키텍쳐 구성에 대한 생각을 많이 했다. Ribs, Viper 등 보다 고단계로 정립된 역할에 대해서도 한 번 튜토리얼을 진행해야할 듯
 
-### 5. LargeTitle 관련 rightBarButton 위치 문제
+<img src = "https://user-images.githubusercontent.com/41438361/122946258-2f88ca80-d3b4-11eb-93ba-80b9dbd46818.png" width = "500">
 
-Large 타이틀은 유지하면서 네비게이션 버튼의 위치를 적절한 곳에 위치 시키고 싶었으나, 확실히 조정하는 게 생각보다 어려웠다. 일반적인 UI button으로 구성하여 bar에 올리는 방식을 추천하여 생명주기에 따라서 해당 뷰를 보여주는 방식으로 구현했다. 오토레이아웃이 생각보다 까다롭고 버튼의 사이즈에 관계하여 뷰 자체가 망가지는 경우도 생기므로 주의하면서 세팅해야할 거 같았다.
-
-<img src = "https://i.stack.imgur.com/2XLBi.gif" width = 400>
-
-+ [참고 레퍼런스](https://stackoverflow.com/questions/45317963/adjust-position-of-bar-button-item-when-using-large-titles-with-ios-11)
-
-### 6. 되도록 클린하게
-
-이번 프로젝트를 진행하면서 최대한 관리가 용이한 방법으로 하되 기존에 사용했던 MVP의 특성을 잃고 싶지 않았다. 외부에서 데이터를 다루는 Repo와 같은 역할은 Manager에게 일임하고 될 수 있으면 protocol로 분리하여 그 역할을 구분지어 두었다. 또한 네트워크 구성에 있어서도 한 곳에 몰아두는 방식 보다는 분리를 통해서 유지 보수가 원활하도록 구성하는 편이 좋기에 분리하였고, 쓰면서 Moya 등의 서드파티가 잘 짜여졌다고 느꼈다. 클린하게 작성한다는 건 가장 와 닿는 건 역할의 분리와 데이터 주입 등 생각해야할 부분이 많다는 것이다. 기존에 뭉탱이로 작업하던 코드들과는 달리 주입방식의 코드와 외부의 분리를 통한 호출은 확실히 테스트 하기에도 굉장히 용이하다.
-
-또한 와닿은 건 DI의 분리와 확실한 레이어 구분이었다. Data 레이어, 엔티티 등 서로가 절대 알아선 안되는 경우에 대해서는 확실하게 구분하고 현재 구성한 Presenter, View의 관계에 있어서도 참조 관계에 대해서도 역할을 명확히 하는게 중요했다. 그리고 구성하면서 느낀 건데 View에서 화면 전환 로직에 있어서 의존성 주입이 있는데 해당 부분은 Cordinator, Container 등으로 분리하여 직접적으로 View에서 모델을 인젝션 하는 건 맞지 않아 보였다.
-
-### 7. 웹 뷰에서 전달된 인터렉션의 결과로 네이티브의 인터렉션이 동작하지 않는 문제
-
-swift의 대부분의 UI 요소에는 UIResponder가 있다. 처리되지 않은 이벤트는 리스폰더 체인을 통해 랩핑된 view로 전달되게 되는데, 내 생각에 WKWebView는 창이 활성화되면 모든 터치 이벤트를 흡수한다. 아무리 터치해도 프린트가 도저히 동작하지 않아 고민하다가 webView 내의 인터렉션을 시도한 후에야 정상적으로 이벤트 전달이 발생했다. 이 후 리스폰더를 간단하게 작성하므로써 해결!
-
-+ [참고 레퍼런스](https://stackoverflow.com/questions/56332558/uibutton-selector-not-working-after-button-tapped-within-wkwebview)
-
-### 8.Compositional layout을 통한 self-sizing
-
-+ [참고 레퍼런스 1](https://munokkim.medium.com/wwdc20-%ED%95%9C%EA%B8%80%EB%B2%88%EC%97%AD-lists-in-uicollectionview-ed47aa6793f9)
-+ [참고 레퍼런스 2](https://stackoverflow.com/questions/59416438/uicollectionviewcompositionallayout-with-self-sizing-cells)
+아쉬운 부분은 정말로 Clean 수준의 정도가 어디까지인가? 하는 의문이다. 레이어의 분리와 영역 구성에 있어서 아직은 추상화가 많이 부족하다. 조금 더 데이터 플로우에 대해서 더 깊에 이해하는게 중요한 시점이다.
 
 ## ScreenShot
 ![IMG_C017886C83C0-1](https://user-images.githubusercontent.com/75239459/177031272-ac8138e1-b619-4bf3-be6e-d2d23e0c87c7.png)
