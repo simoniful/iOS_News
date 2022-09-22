@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/simon/Desktop/FastCampus/News/News/Presentations/NewsTagmaker/View/NewsTagmakerView.swift">
-   </FileRef>
-   <FileRef
       location = "group:News.xcodeproj">
    </FileRef>
    <FileRef

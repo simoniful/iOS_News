@@ -99,4 +99,6 @@ final class NewsTagmakerViewModelTests: XCTestCase {
             .next(3, ["아이폰", "IT", "개발", "iOS", "WWDC"])
         ], "입력 후 버튼 동작 및 태그 선택 시 삭제 성공")
     }
+    
+
 }

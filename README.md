@@ -3,7 +3,7 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
 
 ## Description
 + 최소 타겟 : iOS 14.5
-+ CleanArchitecture + MVP 패턴 적용
++ CleanArchitecture + MVVM-C 패턴 적용
 + CoreData 프레임워크 사용으로 즐겨찾기 목록 유지
 + Storyboard를 활용하지 않고 코드로만 UI 구성
 + Pagination 구현
