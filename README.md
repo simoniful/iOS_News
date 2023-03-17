@@ -124,5 +124,3 @@ swift의 대부분의 UI 요소에는 UIResponder가 있다. 처리되지 않은
 
 ## ScreenShot
 ![IMG_C017886C83C0-1](https://user-images.githubusercontent.com/75239459/177031272-ac8138e1-b619-4bf3-be6e-d2d23e0c87c7.png)
-
-## Video
