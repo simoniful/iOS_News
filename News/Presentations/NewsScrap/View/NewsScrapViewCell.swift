@@ -89,8 +89,11 @@ final class NewsScrapViewCell: UITableViewCell {
     }
     
     func setup(scrapedNews: ScrapedNews) {
-        setupLayout()
+        setupView()
+        setupConstraints()
+        
         selectionStyle = .none
+        
         let date = scrapedNews.pubDate?.toDate()
         let year = date?.toString(pattern: .year)
         let monthDay = date?.toString(pattern: .date)
@@ -104,12 +107,14 @@ final class NewsScrapViewCell: UITableViewCell {
     }
 }
 
-private extension NewsScrapViewCell {
-    func setupLayout() {
+extension NewsScrapViewCell: ViewRepresentable {
+    func setupView() {
         [colorBlock, reportStackView].forEach {
             contentView.addSubview($0)
         }
-        
+    }
+    
+    func setupConstraints() {
         colorBlock.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview()
             $0.width.greaterThanOrEqualTo(90.0)

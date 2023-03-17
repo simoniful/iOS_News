@@ -34,7 +34,8 @@ final class NewsListViewCell: UITableViewCell {
     }()
     
     func setup(news: News) {
-        setupLayout()
+        setupView()
+        setupConstraints()
         
         accessoryType = .disclosureIndicator
         selectionStyle = .none
@@ -45,12 +46,14 @@ final class NewsListViewCell: UITableViewCell {
     }
 }
 
-private extension NewsListViewCell {
-    func setupLayout() {
+extension NewsListViewCell: ViewRepresentable {
+    func setupView() {
         [titleLabel, descriptionLabel, dateLabel].forEach {
             addSubview($0)
         }
-        
+    }
+    
+    func setupConstraints() {
         let superViewInset: CGFloat = 16.0
         
         titleLabel.snp.makeConstraints {
