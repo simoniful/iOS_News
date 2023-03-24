@@ -19,7 +19,7 @@ Naver news 검색 API를 활용한 iOS 어플리케이션.
   + Compositional layout을 통한 self-sizing CollectionView
   + delegate 패턴을 통한 데이터 전달
 + 디테일 웹 뷰
-  + 즐겨찾기 추가/제거
+  + 스크랩 추가/제거
   + 액티비티 인디케이터
   + WebView 기반 연결
   + 링크 클립보드 복사
