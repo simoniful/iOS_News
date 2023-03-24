@@ -117,7 +117,7 @@ swift의 대부분의 UI 요소에는 UIResponder가 있다. 처리되지 않은
 
 + [참고 레퍼런스](https://stackoverflow.com/questions/56332558/uibutton-selector-not-working-after-button-tapped-within-wkwebview)
 
-### 8.Compositional layout을 통한 self-sizing
+### 8. Compositional layout을 통한 self-sizing
 
 + [참고 레퍼런스 1](https://munokkim.medium.com/wwdc20-%ED%95%9C%EA%B8%80%EB%B2%88%EC%97%AD-lists-in-uicollectionview-ed47aa6793f9)
 + [참고 레퍼런스 2](https://stackoverflow.com/questions/59416438/uicollectionviewcompositionallayout-with-self-sizing-cells)
